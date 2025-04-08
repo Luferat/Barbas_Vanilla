@@ -1,0 +1,186 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
+
+html,
+body {
+    position: relative;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.logotipo {
+    display: inline-block;
+    width: 4rem;
+    height: auto;
+}
+
+body {
+    background-attachment: fixed;
+    background-color: rgb(128, 128, 128);
+    background-image: url('../img/barbershop-background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 5.5rem;
+}
+
+a {
+    color: steelblue;
+    text-decoration: none;
+}
+
+a:hover {
+    color: orangered;
+}
+
+.anominimous, .logged {
+    display: inline-block;
+    width: 2rem;
+    height: auto;
+    padding-right: .5rem;
+}
+
+.logged {
+    width: 2.5rem;
+    border-radius: 50%;
+}
+
+.navbar,
+.dropdown-menu {
+    font-size: 1.2rem;
+}
+
+.navbar-toggler {
+    background-color: orange;
+    /* Fundo laranja */
+    border-color: black;
+    /* Borda preta */
+}
+
+.navbar-toggler-icon {
+    filter: invert(100%);
+    /* Deixa o ícone preto */
+}
+
+.topbanner {
+    background-attachment: fixed;
+    background-color: rgb(85, 85, 85);
+    background-image: url('../img/bglogin.jpg');
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.header-flex-img {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-flex-img img {
+    display: block;
+    border-radius: 50%;
+    border: 4px solid white;
+    width: 100%;
+    max-width: 300px;
+}
+
+.header-flex-text {
+    font-size: 130%;
+    color: white;
+    padding: 2rem;
+}
+
+.header-flex-text h2 {
+    font-size: 130%;
+}
+
+@media screen and (min-width: 768px) {
+    .header-flex {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .header-flex-img,
+    .header-flex-text {
+        padding: 4rem;
+    }
+
+    .header-flex-text {
+        font-size: 160%;
+        width: 40%;
+    }
+
+    .header-flex-text h2 {
+        font-size: 150%;
+    }
+
+    .header-flex-img {
+        order: 2;
+        width: 40%;
+    }
+}
+
+.content {
+    background-image: url('../img/bg-site.jpg');
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0;
+}
+
+.card {
+    margin: 10px;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+    width: 330px;
+    overflow: hidden;
+}
+
+.card-img img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin: auto;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.card-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    background-color: #000;
+    text-align: center;
+    padding: 10px;
+}
+
+span.nav-link { cursor: pointer; }
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}

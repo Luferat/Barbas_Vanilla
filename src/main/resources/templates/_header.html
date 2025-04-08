@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/img/logo.jpg">
+    <#if pageCSS??>
+    <link rel="stylesheet" href="${pageCSS}">
+</#if>
+<title>${title}</title>
+</head>
+
+<body>
+
+<div class="container-fluid m-0 p-0 d-flex flex-column position-relative w-100 h-100">
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark m-0 fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><img src="${logo}" alt="Barbas Vanilla Logotipo"
+                                                  class="logotipo"></a>
+            <button class="navbar-toggler bg-warning text-dark" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Serviços</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/local">Onde estamos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/schedule">Agendamentos</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="?" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">Sobre</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item p-2" href="/about#project">Sobre o Barbas Vanilla</a></li>
+                            <li><a class="dropdown-item p-2" href="/about#site">Sobre o Site</a></li>
+                            <li><a class="dropdown-item p-2" href="/about#authors">Sobre os Autores</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item p-2" href="/privacy">Políticas de Privacidade</a></li>
+                            <li><a class="dropdown-item p-2" href="/contacts">Faça Contato</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-auto" id="userInOut">
+                        <#if loggedUser??>
+                        <a href="/account/profile" class="nav-link">
+                            <img src="${loggedUser.photo}" alt="${loggedUser.name}" class="logged">
+                            ${loggedUser.name}
+                        </a>
+                        <#else>
+                        <span class="nav-link">
+    <img src="/img/anonimous_bg_alfa.png" alt="Anônimo" class="anominimous">Entrar
+</span>
+                    </#if>
+
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Procurar..." aria-label="Procurar"
+                           style="min-width: 150px !important;" name="q">
+                    <button class="btn btn-outline-light" type="submit"><i
+                            class="fa-solid fa-magnifying-glass fa-fw"></i></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow-1 d-flex flex-column  position-relative h-100">

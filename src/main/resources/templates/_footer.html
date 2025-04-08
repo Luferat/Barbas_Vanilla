@@ -1,0 +1,73 @@
+</main>
+<footer class="footer bg-dark text-light d-flex flex-column align-items-center justify-content-center">
+    <div class="container m-0 p-0 d-flex align-items-center justify-content-between">
+        <a href="/" class="p-1 pt-3 text-light"><i class="fa-solid fa-house fa-fw fa-2x"></i></a>
+        <small class="copyright text-center">${copyright}</small>
+        <a href="#top" class="p-1 pt-3 text-light"><i class="fa-solid fa-circle-up fa-fw fa-2x"></i></a>
+    </div>
+    <div class="container m-0 p-0 d-flex justify-content-around align-items-center mt-1 pb-4" style="border-top: 2px dotted grey;">
+        <div class="d-flex flex-column pt-4 lh-lg">
+            <h5>Redes Sociais</h5>
+            <a href="https://facebook.com" target="_blank" class="text-light ps-2"><i class="fa-brands fa-square-facebook fa-fw"></i> Facebook</a>
+            <a href="https://instagram.com" target="_blank" class="text-light ps-2"><i class="fa-brands fa-square-instagram fa-fw"></i> Instagram</a>
+            <a href="https://youtube.com" target="_blank" class="text-light ps-2"><i class="fa-brands fa-square-youtube fa-fw"></i> Youtube</a>
+            <a href="https://github.com" target="_blank" class="text-light ps-2"><i class="fa-brands fa-square-github fa-fw"></i> GitHub</a>
+        </div>
+        <div class="d-flex flex-column pt-4 lh-lg">
+            <h5>Acesso rápido</h5>
+            <a href="/about#site" target="_blank" class="text-light ps-2"><i class="fa-solid fa-globe fa-fw"></i> O Site</a>
+            <a href="/about#authors" target="_blank" class="text-light ps-2"><i class="fa-solid fa-user-tie fa-fw"></i> Autores</a>
+            <a href="/privacy" target="_blank" class="text-light ps-2"><i class="fa-solid fa-user-lock fa-fw"></i> Privacidade</a>
+            <a href="/contacts" target="_blank" class="text-light ps-2"><i class="fa-solid fa-comments fa-fw"></i> Contatos</a>
+        </div>
+    </div>
+</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<#if pageJS??><script src="${pageJS}"></script></#if>
+
+<#if !loggedUser??>
+<script>
+    $(document).ready(appRun);
+    function appRun() {
+        $(document).on('click', '#userInOut', userInOut);
+        $(document).on('click', '#closeDialog', closeDialog);
+    }
+    function userInOut() {
+        $('#loginDialog')[0].showModal();
+    }
+    function closeDialog(){
+        $('#loginDialog')[0].close();
+    }
+</script>
+<dialog id="loginDialog" class="border-0 rounded-3 bg-dark text-light">
+    <form method="post" id="loginForm" class="p-2 pd-0" action="/account/login">
+        <h5>Entrar na Conta</h5>
+        <#if loginError??>
+        <p class="text-danger mb-2" id="errorMessage">${loginError}</p>
+        <script>
+            $('#loginDialog')[0].showModal();
+            let close = setTimeout(()=>{$('#errorMessage').hide();}, 5000);
+        </script>
+    </#if>
+    <p>
+        <label for="email">E-mail:</label>
+        <input type="email" class="form-control" id="email" name="email" required value="joca@email.com"/>
+    </p>
+    <p>
+        <label for="password">Senha:</label>
+        <input type="password" class="form-control" id="password" name="password" required value="Senha123"/>
+    </p>
+    <p class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary me-2" id="closeDialog">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+    </p>
+    <p class="text-center"><a href="/accout/password">Esqueceu a senha?</a></p>
+    <p class="text-center mb-0"><a href="/account/new">Criar conta</a></p>
+    </form>
+</dialog>
+</#if>
+</body>
+</html>
