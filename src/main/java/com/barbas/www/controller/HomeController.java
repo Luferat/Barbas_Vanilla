@@ -29,4 +29,28 @@ public class HomeController {
         model.addAttribute("title", config.getName() + " - Sobre");
         return "about";
     }
+
+    @GetMapping("/privacy")
+    public String privacy(Model model) {
+        model.addAttribute("title", config.getName() + " - Políticas de Privacidade");
+        return "privacy";
+    }
+
+    @GetMapping("/local")
+    public String local(Model model) {
+        model.addAttribute("title", config.getName() + " - Onde Estamos");
+        return "local";
+    }
+
+    @GetMapping("/schedule")
+    public String schedule(Model model) {
+        model.addAttribute("title", config.getName() + " - Agendamentos");
+        return "schedule";
+    }
+
+    @GetMapping("/contacts")
+    public String contacts(Model model) {
+        model.addAttribute("title", config.getName() + " - Faça Contato");
+        return "contacts";
+    }
 }
