@@ -1,5 +1,6 @@
 # Projeto Barba´s Vanilla
 `Em 08/04/2025 By Luferat`
+`Turma 13323 2024.1`
 
 Projeto de uma aplicativo Web _startup_, full stack, desenvolvido em Java.
 
