@@ -2,8 +2,11 @@ package com.barbas.www.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "account")
@@ -21,7 +24,7 @@ public class Account {
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    private String photo;
+    private String photo = "/img/anonimous_bg_alfa.png";
     private String tel;
 
     @Column(nullable = false)
@@ -54,5 +57,34 @@ public class Account {
 
     public enum Status {
         ON, OFF, DEL
+    }
+
+    public String getFirstName() {
+        if (this.name == null || this.name.trim().isEmpty()) {
+            return "";
+        }
+        return this.name.split(" ")[0];
+    }
+
+    public int getAge() {
+        if (this.birth == null) {
+            return 0;
+        }
+        return Period.between(this.birth, LocalDate.now()).getYears();
+    }
+
+    public String getTextRole() {
+        if (this.role == null) {
+            return "Função não definida";
+        }
+
+        return switch (this.role) {
+            case ADMIN -> "Administrador";
+            case OPERATOR -> "Operador";
+            case EMPLOYE -> "Colaborador";
+            case ANALIST -> "Analista";
+            case USER -> "Usuário regular";
+            default -> "Função desconhecida: " + this.role.name();
+        };
     }
 }

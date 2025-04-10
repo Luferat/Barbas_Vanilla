@@ -47,7 +47,7 @@
                     <li class="nav-item ms-lg-auto" id="userInOut">
                         <#if loggedUser??>
                         <a href="/account/profile" class="nav-link">
-                            <img src="${loggedUser.photo}" alt="${loggedUser.name}" class="logged">
+                            <img src="${loggedUser.photo}" alt="${loggedUser.name}" class="logged" referrerpolicy="no-referrer">
                             ${loggedUser.name}
                         </a>
                         <#else>
