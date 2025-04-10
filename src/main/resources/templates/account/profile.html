@@ -1,0 +1,28 @@
+<#include "../_header.html">
+
+<#-- Macro para formatação das datas ISO em pt-BR -->
+<#function formatDate dateString>
+<#return dateString?datetime("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")?string("dd/MM/yyyy 'às' HH:mm")>
+</#function>
+
+<article class="container flex-grow-1 content text-light pt-2">
+
+    <div class="d-table text-center m-auto">
+        <h2>${user.name}</h2>
+        <strong><a href="mailto:${user.email}" target="_blank">${user.email}</a></strong>
+        <img src="${user.photo}" alt="${user.name}" class="d-block rounded-2 m-auto mt-3 mb-3" style="width: 200px">
+        <ul class="text-start lh-lg">
+            <li><strong>ID:</strong> ${user.id}</li>
+            <li><strong>Cadastro:</strong> ${formatDate(user.createdAt)}</li>
+            <li><strong>Idade:</strong> ${user.age} anos</li>
+            <li><strong>CPF:</strong> ${user.cpf}</li>
+            <li><strong>Perfil:</strong> ${user.textRole}</li>
+        </ul>
+        <p><button class="btn btn-primary w-100" onclick="location.href='/account/edit'">Editar Perfil</button></p>
+        <p><button class="btn btn-warning w-100" onclick="location.href = confirm('Tem certeza que deseja sair?') ? '/account/logout' : '/account/profile';">Sair / Logout</button></p>
+        <p><button class="btn btn-danger w-100" onclick="location.href = confirm('Essa ação é irreversível!!!') ? '/account/delete' : '/account/profile';">Apagar Perfil</button></p>
+    </div>
+
+</article>
+
+<#include "../_footer.html">

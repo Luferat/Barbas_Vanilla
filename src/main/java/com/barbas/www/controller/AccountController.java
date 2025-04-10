@@ -81,6 +81,8 @@ public class AccountController {
 
         Account user = userOpt.get();
         model.addAttribute("title", config.getName() + " - " + user.getName());
+        model.addAttribute("user", user); // Dados do usuário logado
+        model.addAttribute("pageCSS", "/css/profile.css"); // Folha de estilos adicional
         return "account/profile";
     }
 }
