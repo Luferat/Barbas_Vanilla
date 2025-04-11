@@ -1,0 +1,21 @@
+<#assign title = title + " - Apagar " + loggedUser.name>
+<#include "../_header.html">
+
+<article class="container flex-grow-1 content text-light pt-2">
+
+    <div class="d-table">
+        <h2>Olá ${loggedUser.name}</h2>
+        <p>Tem certeza que deseja apagar sua conta do aplicativo?</p>
+        <blockquote class="ps-4"><em>Essa ação é irreversível e todos os seus registros serão apagados junto com a
+            conta.</em></blockquote>
+        <blockquote class="ps-4"><em>Você precisará se cadastrar com uma nova conta para voltar a ter acesso aos
+            recursos do aplicativo.</em></blockquote>
+        <div class="d-table">
+            <p><a href="/account/profile" class="btn btn-primary w-100">Não, voltar para o Perfil</a></p>
+            <p><a href="/account/delete/confirm" class="btn btn-warning w-100">Sim, apagar minha conta</a></p>
+        </div>
+    </div>
+
+</article>
+
+<#include "../_footer.html">

@@ -4,6 +4,7 @@ import com.barbas.www.model.Account;
 import com.barbas.www.repository.AccountRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.Optional;
 import java.util.Set;
@@ -44,5 +45,20 @@ public class AuthUtil {
 
         Set<Account.Role> allowedSet = Set.of(allowedRoles);
         return allowedSet.contains(userOpt.get().getRole());
+    }
+
+    public static boolean deleteAccountCookie(HttpServletResponse response) {
+        try {
+            Cookie removeCookie = new Cookie("account", "");
+            removeCookie.setMaxAge(0);  // Expira imediatamente
+            removeCookie.setPath("/");  // Deve ser o mesmo path usado ao criar o cookie
+            removeCookie.setHttpOnly(true);  // Melhor prática de segurança
+            removeCookie.setSecure(true);  // Adicionado para uso com HTTPS
+            response.addCookie(removeCookie);
+            return true;  // Indica que a operação foi bem-sucedida
+        } catch (Exception e) {
+            // Logar a exceção seria recomendado em um ambiente real
+            return false;  // Indica que a operação falhou
+        }
     }
 }

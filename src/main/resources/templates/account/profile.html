@@ -1,3 +1,4 @@
+<#assign title = title + " - Perfil de " + loggedUser.name>
 <#include "../_header.html">
 
 <#-- Macro para formatação das datas ISO em pt-BR -->
@@ -8,19 +9,19 @@
 <article class="container flex-grow-1 content text-light pt-2">
 
     <div class="d-table text-center m-auto">
-        <h2>${user.name}</h2>
-        <strong><a href="mailto:${user.email}" target="_blank">${user.email}</a></strong>
-        <img src="${user.photo}" alt="${user.name}" class="d-block rounded-2 m-auto mt-3 mb-3" style="width: 200px">
+        <h2>${loggedUser.name}</h2>
+        <strong><a href="mailto:${loggedUser.email}" target="_blank">${loggedUser.email}</a></strong>
+        <img src="${loggedUser.photo}" alt="${loggedUser.name}" class="d-block rounded-2 m-auto mt-3 mb-3" style="width: 200px">
         <ul class="text-start lh-lg">
-            <li><strong>ID:</strong> ${user.id}</li>
-            <li><strong>Cadastro:</strong> ${formatDate(user.createdAt)}</li>
-            <li><strong>Idade:</strong> ${user.age} anos</li>
-            <li><strong>CPF:</strong> ${user.cpf}</li>
-            <li><strong>Perfil:</strong> ${user.textRole}</li>
+            <li><strong>ID:</strong> ${loggedUser.id}</li>
+            <li><strong>Cadastro:</strong> ${formatDate(loggedUser.createdAt)}</li>
+            <li><strong>Idade:</strong> ${loggedUser.age} anos</li>
+            <li><strong>CPF:</strong> ${loggedUser.cpf}</li>
+            <li><strong>Perfil:</strong> ${loggedUser.textRole}</li>
         </ul>
-        <p><button class="btn btn-primary w-100" onclick="location.href='/account/edit'">Editar Perfil</button></p>
-        <p><button class="btn btn-warning w-100" onclick="location.href = confirm('Tem certeza que deseja sair?') ? '/account/logout' : '/account/profile';">Sair / Logout</button></p>
-        <p><button class="btn btn-danger w-100" onclick="location.href = confirm('Essa ação é irreversível!!!') ? '/account/delete' : '/account/profile';">Apagar Perfil</button></p>
+        <p><a href="/account/edit" class="btn btn-primary w-100">Editar Perfil</a></p>
+        <p><a href="/account/logout" class="btn btn-warning w-100">Sair / Logout</a></p>
+        <p><a href="/account/delete" class="btn btn-danger w-100">Apagar Perfil</a></p>
     </div>
 
 </article>

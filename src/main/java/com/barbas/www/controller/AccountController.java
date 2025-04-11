@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.Optional;
 
 @Controller
@@ -47,15 +48,16 @@ public class AccountController {
         Optional<Account> userOpt = accountRepository.findByEmail(email);
         if (userOpt.isPresent()) {
             Account user = userOpt.get();
-            // Verifica se o status é ON
-            if (!user.getStatus().equals(Account.Status.ON)) {
-                if(user.getStatus().equals(Account.Status.OFF)) {
-                    redirectAttributes.addFlashAttribute("loginError", "Conta inativa. Entre em contato com o suporte.");
-                } else {
-                    redirectAttributes.addFlashAttribute("loginError", "Conta inexistente. Revise seus dados ou cadastre-se.");
-                }
+
+            // Verifica se o status é OFF ou DEL
+            if (user.getStatus().equals(Account.Status.OFF)) {
+                redirectAttributes.addFlashAttribute("loginError", "Conta inativa. Entre em contato com o suporte.");
+                return "redirect:/";
+            } else if (user.getStatus().equals(Account.Status.DEL)) {
+                redirectAttributes.addFlashAttribute("loginError", "Conta inexistente. Revise seus dados ou cadastre-se.");
                 return "redirect:/";
             }
+
             String hashedPassword = HashUtil.sha256(password); // Criptografa a senha digitada
             if (userOpt.get().getPassword().equals(hashedPassword)) {
                 Cookie loginCookie = new Cookie("account", userOpt.get().getId().toString());
@@ -72,17 +74,72 @@ public class AccountController {
 
     @GetMapping("/profile")
     public String showProfile(Model model, HttpServletRequest request) {
-        Optional<Account> userOpt = AuthUtil.getLoggedUser(request, accountRepository);
+        // GUARD - Somente usuário logado
+        if (!AuthUtil.isLogged(request, accountRepository)) {
+            return "redirect:/"; // Redireciona se não estiver logado
+        }
+        model.addAttribute("title", config.getName());
+        return "account/profile";
+    }
+
+    @GetMapping("/edit")
+    public String acountEdit(Model model, HttpServletRequest request) {
+        // GUARD - Somente usuário logado
+        if (!AuthUtil.isLogged(request, accountRepository)) {
+            return "redirect:/"; // Redireciona se não estiver logado
+        }
+        model.addAttribute("title", config.getName());
+        return "account/edit";
+    }
+
+    @GetMapping("/logout")
+    public String accountLogout(Model model, HttpServletRequest request) {
+        // GUARD - Somente usuário logado
+        if (!AuthUtil.isLogged(request, accountRepository)) {
+            return "redirect:/"; // Redireciona se não estiver logado
+        }
+        model.addAttribute("title", config.getName());
+        return "account/logout";
+    }
+
+    @GetMapping("/logout/confirm")
+    public String accountLogoutConfirm(HttpServletResponse response, HttpServletRequest request) {
+        // GUARD - Somente usuário logado
+        if (!AuthUtil.isLogged(request, accountRepository)) {
+            return "redirect:/"; // Redireciona se não estiver logado
+        }
+        AuthUtil.deleteAccountCookie(response);
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete")
+    public String accountDelete(Model model, HttpServletRequest request) {
+        // GUARD - Somente usuário logado
+        if (!AuthUtil.isLogged(request, accountRepository)) {
+            return "redirect:/"; // Redireciona se não estiver logado
+        }
+        model.addAttribute("title", config.getName());
+        return "account/delete";
+    }
+
+    @GetMapping("/delete/confirm")
+    public String accountDeleteConfirm(HttpServletResponse response, HttpServletRequest request) {
 
         // GUARD - Somente usuário logado
         if (!AuthUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
         }
 
-        Account user = userOpt.get();
-        model.addAttribute("title", config.getName() + " - " + user.getName());
-        model.addAttribute("user", user); // Dados do usuário logado
-        model.addAttribute("pageCSS", "/css/profile.css"); // Folha de estilos adicional
-        return "account/profile";
+        Optional<Account> userOpt = AuthUtil.getLoggedUser(request, accountRepository);
+
+        // Se o usuário existe, marca como deletado
+        userOpt.ifPresent(account -> {
+            account.setStatus(Account.Status.DEL);
+            accountRepository.save(account);
+        });
+
+        AuthUtil.deleteAccountCookie(response);
+        return "redirect:/";
     }
+
 }

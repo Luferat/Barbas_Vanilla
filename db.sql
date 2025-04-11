@@ -1,5 +1,4 @@
 -- Limpe as tabelas se já existirem dados
--- Limpe as tabelas se já existirem dados
 DELETE FROM account;
 ALTER TABLE account ALTER COLUMN id RESTART WITH 1;
 
