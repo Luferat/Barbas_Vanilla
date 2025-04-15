@@ -28,18 +28,15 @@
 <#if pageJS??><script src="${pageJS}"></script></#if>
 
 <#if !loggedUser??>
+<#-- Pop-up de login -->
 <script>
     $(document).ready(appRun);
     function appRun() {
         $(document).on('click', '#userInOut', userInOut);
         $(document).on('click', '#closeDialog', closeDialog);
     }
-    function userInOut() {
-        $('#loginDialog')[0].showModal();
-    }
-    function closeDialog(){
-        $('#loginDialog')[0].close();
-    }
+    function userInOut() { $('#loginDialog')[0].showModal(); }
+    function closeDialog(){ $('#loginDialog')[0].close(); }
 </script>
 <dialog id="loginDialog" class="border-0 rounded-3 bg-dark text-light">
     <form method="post" id="loginForm" class="p-2 pd-0" action="/account/login">
@@ -75,6 +72,7 @@
 </script>
 
 <#if success??>
+<#-- Popup para mensagens de sucesso -->
 <dialog id="successDialog" class="border border-1 border-success rounded-3 bg-dark text-success pb-0">
     <p>${success}</p>
     <p class="text-center"><button onclick="closeModal('successDialog')" class="btn btn-outline-success btn-sm">Fechar</button></p>
@@ -83,6 +81,7 @@
 </#if>
 
 <#if error??>
+<#-- Popup para mensagens de erro -->
 <dialog id="errorDialog" class="border border-1 border-danger rounded-3 bg-dark text-danger pb-0">
     <p>${error}</p>
     <p class="text-center"><button onclick="closeModal('errorDialog')" class="btn btn-outline-danger btn-sm">Fechar</button></p>
