@@ -4,7 +4,7 @@ import com.barbas.www.config.Config;
 import com.barbas.www.model.Account;
 import com.barbas.www.repository.AccountRepository;
 import com.barbas.www.util.AuthUtil;
-import com.barbas.www.util.HashUtil;
+import com.barbas.www.util.BCryptUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -58,8 +58,7 @@ public class AccountController {
                 return "redirect:/";
             }
 
-            String hashedPassword = HashUtil.sha256(password); // Criptografa a senha digitada
-            if (userOpt.get().getPassword().equals(hashedPassword)) {
+            if (BCryptUtil.matches(password, user.getPassword())) {
                 Cookie loginCookie = new Cookie("account", userOpt.get().getId().toString());
                 loginCookie.setMaxAge(config.getCookieHoursAge() * 60 * 60); // 24 horas
                 loginCookie.setHttpOnly(true);
@@ -198,8 +197,7 @@ public class AccountController {
             return "redirect:/account/edit";
         }
 
-        String actualPasswordHashed = HashUtil.sha256(actualPassword);
-        if (!actualPasswordHashed.equals(user.getPassword())) {
+        if (!BCryptUtil.matches(actualPassword, user.getPassword())) {
             redirectAttributes.addFlashAttribute("error", "Senha atual incorreta.");
             return "redirect:/account/edit";
         }
@@ -214,7 +212,7 @@ public class AccountController {
             return "redirect:/account/edit";
         }
 
-        user.setPassword(HashUtil.sha256(newPassword1));
+        user.setPassword(BCryptUtil.encode(newPassword1));
         accountRepository.save(user);
 
         redirectAttributes.addFlashAttribute("success", "Senha atualizada com sucesso!");

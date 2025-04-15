@@ -4,7 +4,7 @@ import com.barbas.www.config.Config;
 import com.barbas.www.model.Account;
 import com.barbas.www.repository.AccountRepository;
 import com.barbas.www.util.AuthUtil;
-import com.barbas.www.util.HashUtil;
+import com.barbas.www.util.BCryptUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -76,7 +76,7 @@ public class NoAccountController {
         newAccount.setPhoto(photo);
         newAccount.setCpf(cpf);
         newAccount.setBirth(LocalDate.parse(birth));
-        newAccount.setPassword(HashUtil.sha256(password1));
+        newAccount.setPassword(BCryptUtil.encode(password1));
         newAccount.setCreatedAt(LocalDateTime.now());
         newAccount.setStatus(Account.Status.ON);
         newAccount.setRole(Account.Role.USER);
@@ -127,7 +127,7 @@ public class NoAccountController {
         }
 
         String newPassword = generateRandomPassword();
-        account.setPassword(HashUtil.sha256(newPassword));
+        account.setPassword(BCryptUtil.encode(newPassword));
         accountRepository.save(account);
 
         model.addAttribute("title", config.getName() + " - Recuperar Senha");
