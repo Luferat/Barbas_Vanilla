@@ -1,0 +1,66 @@
+<#include "../_header.html">
+
+<article class="container flex-grow-1 content text-light pt-2">
+
+    <#if success??>
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        ${success}
+    </div>
+    </#if>
+    <#if error??>
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        ${error}
+    </div>
+    </#if>
+
+<h2>Cadastro</h2>
+    <p>Todos os campos devem ser preenchidos!</p>
+
+    <form action="/account/new/save" method="post" name="newAccountForm" id="newAccountForm" class="d-table m-auto" style="width: 100%; max-width: 500px">
+
+        <p>
+            <label for="newName" class="form-label">Nome:</label>
+            <input type="text" name="name" id="newName" required minlength="3" class="form-control">
+        </p>
+
+        <p>
+            <label for="newEmail" class="form-label">E-mail:</label>
+            <input type="email" name="email" id="newEmail" required class="form-control">
+        </p>
+
+        <p>
+            <label for="newPhoto" class="form-label">URL da foto:</label>
+            <input type="text" name="photo" id="newPhoto" required class="form-control">
+        </p>
+
+        <p>
+            <label for="newBirth" class="form-label">Nascimento:</label>
+            <input type="date" id="newBirth" name="birth" required  class="form-control">
+        </p>
+
+        <p>
+            <label for="newCpf" class="form-label">CPF:</label>
+            <input type="text" name="cpf" id="newCpf" required class="form-control" minlength="11" maxlength="14">
+        </p>
+        <hr>
+        <p>
+            <label for="newPassword1" class="form-label">Senha:</label>
+            <input type="password" name="password1" id="newPassword1" required class="form-control" minlength="7" style="width:100%;max-width:300px">
+        </p>
+
+        <p>
+            <label for="newPassword2" class="form-label">Repita a senha:</label>
+            <input type="password" name="password2" id="newPassword2" required class="form-control" minlength="7" style="width:100%;max-width:300px">
+        </p>
+
+        <p>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </p>
+
+    </form>
+
+</article>
+
+<#include "../_footer.html">
