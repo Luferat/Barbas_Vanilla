@@ -75,7 +75,7 @@
 </script>
 
 <#if success??>
-<dialog id="successDialog" class="border border-1 border-success rounded-3 bg-dark text-success">
+<dialog id="successDialog" class="border border-1 border-success rounded-3 bg-dark text-success pb-0">
     <p>${success}</p>
     <p class="text-center"><button onclick="closeModal('successDialog')" class="btn btn-outline-success btn-sm">Fechar</button></p>
 </dialog>
@@ -83,7 +83,7 @@
 </#if>
 
 <#if error??>
-<dialog id="errorDialog" class="border border-1 border-danger rounded-3 bg-dark text-danger">
+<dialog id="errorDialog" class="border border-1 border-danger rounded-3 bg-dark text-danger pb-0">
     <p>${error}</p>
     <p class="text-center"><button onclick="closeModal('errorDialog')" class="btn btn-outline-danger btn-sm">Fechar</button></p>
 </dialog>
