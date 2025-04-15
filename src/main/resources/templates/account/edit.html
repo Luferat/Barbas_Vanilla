@@ -8,63 +8,56 @@
 
 <article class="container flex-grow-1 content text-light pt-2" xmlns="http://www.w3.org/1999/html">
 
-    <#if success??>
-    <div class="alert alert-success  alert-dismissible">${success}</div>
-</#if>
-<#if error??>
-<div class="alert alert-danger  alert-dismissible">${error}</div>
-</#if>
+    <h2>Editando ${loggedUser.name}</h2>
+    <p><em>Altere apenas os campos necessários. Campos <code>Id</code>, <code>Data de cadastro</code>,
+        <code>Nascimento</code>,
+        <code>função</code>
+        e <code>CPF</code> não podem ser editados. Entre em contato com o suporte para saber mais.</em></p>
+    <form action="/account/edit/save" method="post" name="profileEditForm" id="profileEditForm"
+          class="d-table m-auto" style="width: 100%; max-width: 500px">
+        <p>
+            <label for="profileName" class="form-label">Nome:</label>
+            <input type="text" name="name" id="profileName" class="form-control" required minlength="3"
+                   value="${loggedUser.name}">
+        </p>
+        <p>
+            <label for="profileEmail" class="form-label">E-mail:</label>
+            <input type="email" name="email" id="profileEmail" class="form-control" required
+                   value="${loggedUser.email}">
+        </p>
+        <p>
+            <label for="profilePhoto" class="form-label">URL da foto:</label>
+            <input type="text" name="photo" id="profilePhoto" class="form-control" required
+                   value="${loggedUser.photo}">
+        </p>
+        <p>
+            <button type="submit" class="btn btn-primary">Salvar Perfil</button>
+        </p>
+    </form>
 
-<h2>Editando ${loggedUser.name}</h2>
-<p><em>Altere apenas os campos necessários. Campos <code>Id</code>, <code>Data de cadastro</code>,
-    <code>Nascimento</code>,
-    <code>função</code>
-    e <code>CPF</code> não podem ser editados. Entre em contato com o suporte para saber mais.</em></p>
-<form action="/account/edit/save" method="post" name="profileEditForm" id="profileEditForm"
-      class="d-table m-auto" style="width: 100%; max-width: 500px">
-    <p>
-        <label for="profileName" class="form-label">Nome:</label>
-        <input type="text" name="name" id="profileName" class="form-control" required minlength="3"
-               value="${loggedUser.name}">
-    </p>
-    <p>
-        <label for="profileEmail" class="form-label">E-mail:</label>
-        <input type="email" name="email" id="profileEmail" class="form-control" required
-               value="${loggedUser.email}">
-    </p>
-    <p>
-        <label for="profilePhoto" class="form-label">URL da foto:</label>
-        <input type="text" name="photo" id="profilePhoto" class="form-control" required
-               value="${loggedUser.photo}">
-    </p>
-    <p>
-        <button type="submit" class="btn btn-primary">Salvar Perfil</button>
-    </p>
-</form>
+    <hr>
 
-<hr>
-
-<h2>Senha de ${loggedUser.name}</h2>
-<p><em>Use este espaço para trocar a senha de entrada.</em></p>
-<form action="/account/password/save" method="post" name="passwordEditForm" id="passwordEditForm"
-      class="d-table m-auto" style="width: 100%; max-width: 300px">
-    <p>
-        <label for="passwordActual" class="form-label">Senha atual:</label>
-        <input type="password" name="actualPassword" id="passwordActual" class="form-control" required
-               minlength="7">
-    </p>
-    <p>
-        <label for="passwordNew1" class="form-label">Nova senha:</label>
-        <input type="password" name="newPassword1" id="passwordNew1" class="form-control" required minlength="7">
-    </p>
-    <p>
-        <label for="passwordNew2" class="form-label">Repita a senha:</label>
-        <input type="password" name="newPassword2" id="passwordNew2" class="form-control" required minlength="7">
-    </p>
-    <p>
-        <button type="submit" class="btn btn-primary">Salvar Senha</button>
-    </p>
-</form>
+    <h2>Senha de ${loggedUser.name}</h2>
+    <p><em>Use este espaço para trocar a senha de entrada.</em></p>
+    <form action="/account/password/save" method="post" name="passwordEditForm" id="passwordEditForm"
+          class="d-table m-auto" style="width: 100%; max-width: 300px">
+        <p>
+            <label for="passwordActual" class="form-label">Senha atual:</label>
+            <input type="password" name="actualPassword" id="passwordActual" class="form-control" required
+                   minlength="7">
+        </p>
+        <p>
+            <label for="passwordNew1" class="form-label">Nova senha:</label>
+            <input type="password" name="newPassword1" id="passwordNew1" class="form-control" required minlength="7">
+        </p>
+        <p>
+            <label for="passwordNew2" class="form-label">Repita a senha:</label>
+            <input type="password" name="newPassword2" id="passwordNew2" class="form-control" required minlength="7">
+        </p>
+        <p>
+            <button type="submit" class="btn btn-primary">Salvar Senha</button>
+        </p>
+    </form>
 
 </article>
 

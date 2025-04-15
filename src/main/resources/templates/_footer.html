@@ -68,5 +68,27 @@
     </form>
 </dialog>
 </#if>
+
+<script>
+    function openModal(modalId) { $('#' + modalId)[0].showModal(); }
+    function closeModal(modalId) { $('#' + modalId)[0].close(); }
+</script>
+
+<#if success??>
+<dialog id="successDialog" class="border border-1 border-success rounded-3 bg-dark text-success">
+    <p>${success}</p>
+    <p class="text-center"><button onclick="closeModal('successDialog')" class="btn btn-outline-success btn-sm">Fechar</button></p>
+</dialog>
+<script>openModal('successDialog')</script>
+</#if>
+
+<#if error??>
+<dialog id="errorDialog" class="border border-1 border-danger rounded-3 bg-dark text-danger">
+    <p>${error}</p>
+    <p class="text-center"><button onclick="closeModal('errorDialog')" class="btn btn-outline-danger btn-sm">Fechar</button></p>
+</dialog>
+<script>openModal('errorDialog')</script>
+</#if>
+
 </body>
 </html>
