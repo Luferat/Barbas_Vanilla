@@ -8,21 +8,35 @@
 
 <article class="container flex-grow-1 content text-light pt-2">
 
-    <div class="d-table text-center m-auto">
-        <h2>${loggedUser.name}</h2>
-        <strong><a href="mailto:${loggedUser.email}" target="_blank">${loggedUser.email}</a></strong>
-        <img src="${loggedUser.photo}" alt="${loggedUser.name}" class="d-block rounded-2 m-auto mt-3 mb-3" style="width: 200px">
-        <ul class="text-start lh-lg">
-            <li><strong>ID:</strong> ${loggedUser.id}</li>
-            <li><strong>Cadastro:</strong> ${formatDate(loggedUser.createdAt)}</li>
-            <li><strong>Idade:</strong> ${loggedUser.age} anos</li>
-            <li><strong>CPF:</strong> ${loggedUser.cpf}</li>
-            <li><strong>Perfil:</strong> ${loggedUser.textRole}</li>
-        </ul>
-        <p><a href="/account/edit" class="btn btn-primary w-100">Editar Perfil</a></p>
-        <p><a href="/account/logout" class="btn btn-warning w-100">Sair / Logout</a></p>
-        <p><a href="/account/delete" class="btn btn-danger w-100">Apagar Perfil</a></p>
+    <#if success??>
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        ${success}
     </div>
+    </#if>
+    <#if error??>
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    ${error}
+</div>
+    </#if>
+
+<div class="d-table text-center m-auto">
+    <h2>${loggedUser.name}</h2>
+    <strong><a href="mailto:${loggedUser.email}" target="_blank">${loggedUser.email}</a></strong>
+    <img src="${loggedUser.photo}" alt="${loggedUser.name}" class="d-block rounded-2 m-auto mt-3 mb-3"
+         style="width: 200px">
+    <ul class="text-start lh-lg">
+        <li><strong>ID:</strong> ${loggedUser.id}</li>
+        <li><strong>Cadastro:</strong> ${formatDate(loggedUser.createdAt)}</li>
+        <li><strong>Idade:</strong> ${loggedUser.age} anos</li>
+        <li><strong>CPF:</strong> ${loggedUser.cpf}</li>
+        <li><strong>Perfil:</strong> ${loggedUser.textRole}</li>
+    </ul>
+    <p><a href="/account/edit" class="btn btn-primary w-100">Editar Perfil</a></p>
+    <p><a href="/account/logout" class="btn btn-warning w-100">Sair / Logout</a></p>
+    <p><a href="/account/delete" class="btn btn-danger w-100">Apagar Perfil</a></p>
+</div>
 
 </article>
 

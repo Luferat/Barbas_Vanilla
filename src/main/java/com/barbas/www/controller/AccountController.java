@@ -142,4 +142,84 @@ public class AccountController {
         return "redirect:/";
     }
 
+    @PostMapping("/edit/save")
+    public String saveProfileEdit(
+            @RequestParam String name,
+            @RequestParam String email,
+            @RequestParam String photo,
+            HttpServletRequest request,
+            RedirectAttributes redirectAttributes
+    ) {
+        Optional<Account> userOpt = AuthUtil.getLoggedUser(request, accountRepository);
+
+        // GUARD - usuário logado com status ON
+        if (userOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Acesso negado. Faça login para continuar.");
+            return "redirect:/";
+        }
+
+        Account user = userOpt.get();
+
+        try {
+            // Atualiza apenas os campos permitidos
+            user.setName(name);
+            user.setEmail(email);
+            user.setPhoto(photo);
+
+            accountRepository.save(user);
+
+            redirectAttributes.addFlashAttribute("success", "Perfil atualizado com sucesso!");
+            return "redirect:/account/profile";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Erro ao atualizar perfil: " + e.getMessage());
+            return "redirect:/account/edit";
+        }
+    }
+
+    @PostMapping("/password/save")
+    public String savePasswordEdit(
+            @RequestParam String actualPassword,
+            @RequestParam String newPassword1,
+            @RequestParam String newPassword2,
+            HttpServletRequest request,
+            RedirectAttributes redirectAttributes
+    ) {
+        Optional<Account> userOpt = AuthUtil.getLoggedUser(request, accountRepository);
+
+        if (userOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Acesso negado. Faça login para continuar.");
+            return "redirect:/";
+        }
+
+        Account user = userOpt.get();
+
+        if (!user.getStatus().equals(Account.Status.ON)) {
+            redirectAttributes.addFlashAttribute("error", "Conta inativa ou suspensa. Não é possível alterar a senha.");
+            return "redirect:/account/edit";
+        }
+
+        String actualPasswordHashed = HashUtil.sha256(actualPassword);
+        if (!actualPasswordHashed.equals(user.getPassword())) {
+            redirectAttributes.addFlashAttribute("error", "Senha atual incorreta.");
+            return "redirect:/account/edit";
+        }
+
+        if (!newPassword1.equals(newPassword2)) {
+            redirectAttributes.addFlashAttribute("error", "As novas senhas não coincidem.");
+            return "redirect:/account/edit";
+        }
+
+        if (newPassword1.length() < 7) {
+            redirectAttributes.addFlashAttribute("error", "A nova senha deve ter pelo menos 7 caracteres.");
+            return "redirect:/account/edit";
+        }
+
+        user.setPassword(HashUtil.sha256(newPassword1));
+        accountRepository.save(user);
+
+        redirectAttributes.addFlashAttribute("success", "Senha atualizada com sucesso!");
+        return "redirect:/account/profile";
+    }
+
+
 }
