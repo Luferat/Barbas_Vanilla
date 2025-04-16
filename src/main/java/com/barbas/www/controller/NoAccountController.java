@@ -28,7 +28,7 @@ public class NoAccountController {
     private final AccountRepository accountRepository;
 
     @GetMapping("/new")
-    public String newAccount(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    public String newAccount(Model model, HttpServletRequest request) {
         if (AuthUtil.isLogged(request, accountRepository)) {
             return "redirect:/";
         }
@@ -88,7 +88,7 @@ public class NoAccountController {
     }
 
     @GetMapping("/password")
-    public String passwordRecovery(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    public String passwordRecovery(Model model, HttpServletRequest request) {
         if (AuthUtil.isLogged(request, accountRepository)) {
             return "redirect:/";
         }
@@ -102,8 +102,7 @@ public class NoAccountController {
             @RequestParam String email,
             @RequestParam String cpf,
             Model model,
-            HttpServletRequest request,
-            RedirectAttributes redirectAttributes) {
+            HttpServletRequest request) {
 
         if (AuthUtil.isLogged(request, accountRepository)) {
             return "redirect:/";

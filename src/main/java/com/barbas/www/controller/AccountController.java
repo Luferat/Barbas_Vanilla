@@ -9,8 +9,6 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +24,6 @@ import java.util.Optional;
 @RequestMapping("/account")
 public class AccountController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
     private final Config config;
     private final AccountRepository accountRepository;
 
@@ -40,16 +37,15 @@ public class AccountController {
             Model model
     ) {
 
-        // GUARD - Somente usuários NÃO logados
+        // GUARD - NOT logged user only
         if (AuthUtil.isLogged(request, accountRepository)) {
-            return "redirect:/"; // Já está logado, redireciona
+            return "redirect:/";
         }
 
         Optional<Account> userOpt = accountRepository.findByEmail(email);
         if (userOpt.isPresent()) {
             Account user = userOpt.get();
 
-            // Verifica se o status é OFF ou DEL
             if (user.getStatus().equals(Account.Status.OFF)) {
                 redirectAttributes.addFlashAttribute("loginError", "Conta inativa. Entre em contato com o suporte.");
                 return "redirect:/";
@@ -73,7 +69,7 @@ public class AccountController {
 
     @GetMapping("/profile")
     public String showProfile(Model model, HttpServletRequest request) {
-        // GUARD - Somente usuário logado
+        // GUARD - Logged user only
         if (!AuthUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
         }
@@ -82,8 +78,8 @@ public class AccountController {
     }
 
     @GetMapping("/edit")
-    public String acountEdit(Model model, HttpServletRequest request) {
-        // GUARD - Somente usuário logado
+    public String accountEdit(Model model, HttpServletRequest request) {
+        // GUARD - Logged user only
         if (!AuthUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
         }
@@ -93,7 +89,7 @@ public class AccountController {
 
     @GetMapping("/logout")
     public String accountLogout(Model model, HttpServletRequest request) {
-        // GUARD - Somente usuário logado
+        // GUARD - Logged user only
         if (!AuthUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
         }
@@ -103,7 +99,7 @@ public class AccountController {
 
     @GetMapping("/logout/confirm")
     public String accountLogoutConfirm(HttpServletResponse response, HttpServletRequest request) {
-        // GUARD - Somente usuário logado
+        // GUARD - Logged user only
         if (!AuthUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
         }
@@ -113,9 +109,9 @@ public class AccountController {
 
     @GetMapping("/delete")
     public String accountDelete(Model model, HttpServletRequest request) {
-        // GUARD - Somente usuário logado
+        // GUARD - Logged user only
         if (!AuthUtil.isLogged(request, accountRepository)) {
-            return "redirect:/"; // Redireciona se não estiver logado
+            return "redirect:/";
         }
         model.addAttribute("title", config.getName());
         return "account/delete";
@@ -124,14 +120,13 @@ public class AccountController {
     @GetMapping("/delete/confirm")
     public String accountDeleteConfirm(HttpServletResponse response, HttpServletRequest request) {
 
-        // GUARD - Somente usuário logado
+        // GUARD - Logged user only
         if (!AuthUtil.isLogged(request, accountRepository)) {
-            return "redirect:/"; // Redireciona se não estiver logado
+            return "redirect:/";
         }
 
         Optional<Account> userOpt = AuthUtil.getLoggedUser(request, accountRepository);
 
-        // Se o usuário existe, marca como deletado
         userOpt.ifPresent(account -> {
             account.setStatus(Account.Status.DEL);
             accountRepository.save(account);
@@ -151,7 +146,7 @@ public class AccountController {
     ) {
         Optional<Account> userOpt = AuthUtil.getLoggedUser(request, accountRepository);
 
-        // GUARD - usuário logado com status ON
+        // GUARD - Logged Status.ON user only
         if (userOpt.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Acesso negado. Faça login para continuar.");
             return "redirect:/";
@@ -160,7 +155,6 @@ public class AccountController {
         Account user = userOpt.get();
 
         try {
-            // Atualiza apenas os campos permitidos
             user.setName(name);
             user.setEmail(email);
             user.setPhoto(photo);
