@@ -2,46 +2,50 @@
 
 <article class="container flex-grow-1 content text-light pt-2">
 
-<h2>Cadastro</h2>
+    <h2>Cadastro</h2>
     <p>Todos os campos devem ser preenchidos!</p>
 
-    <form action="/account/new/save" method="post" name="newAccountForm" id="newAccountForm" class="d-table m-auto" style="width: 100%; max-width: 500px">
+    <form action="/account/new/save" method="post" name="newAccountForm" id="newAccountForm"
+          class="d-table m-auto was-validated" style="width: 100%; max-width: 500px">
 
-        <p>
+        <div class="mb-3 mt-3">
             <label for="newName" class="form-label">Nome:</label>
             <input type="text" name="name" id="newName" required minlength="3" class="form-control">
-        </p>
+            <div class="invalid-feedback">Deve ter pelo menos 3 caracteres.</div>
+        </div>
 
-        <p>
+        <div class="mb-3">
             <label for="newEmail" class="form-label">E-mail:</label>
             <input type="email" name="email" id="newEmail" required class="form-control">
-        </p>
+            <div class="invalid-feedback">Tem que ser um e-mail válido.</div>
+        </div>
 
-        <p>
+        <div class="mb-3">
             <label for="newPhoto" class="form-label">URL da foto:</label>
             <input type="text" name="photo" id="newPhoto" required class="form-control">
-        </p>
+        </div>
 
-        <p>
+        <div class="mb-3">
             <label for="newBirth" class="form-label">Nascimento:</label>
-            <input type="date" id="newBirth" name="birth" required  class="form-control">
-        </p>
+            <input type="date" id="newBirth" name="birth" required class="form-control">
+        </div>
 
-        <p>
+        <div class="mb-3">
             <label for="newCpf" class="form-label">CPF:</label>
             <input type="text" name="cpf" id="newCpf" required class="form-control" minlength="11" maxlength="14">
-        </p>
+        </div>
         <hr>
-        <p>
+        <div class="mb-3">
             <label for="newPassword1" class="form-label">Senha:</label>
-            <input type="password" name="password1" id="newPassword1" required class="form-control" minlength="7" style="width:100%;max-width:300px">
-        </p>
+            <input type="password" name="password1" id="newPassword1" required class="form-control" minlength="7"
+                   style="width:100%;max-width:300px">
+        </div>
 
-        <p>
+        <div class="mb-3">
             <label for="newPassword2" class="form-label">Repita a senha:</label>
-            <input type="password" name="password2" id="newPassword2" required class="form-control" minlength="7" style="width:100%;max-width:300px">
-        </p>
-
+            <input type="password" name="password2" id="newPassword2" required class="form-control" minlength="7"
+                   style="width:100%;max-width:300px">
+        </div>
         <p>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
         </p>

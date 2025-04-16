@@ -14,21 +14,24 @@
         <code>função</code>
         e <code>CPF</code> não podem ser editados. Entre em contato com o suporte para saber mais.</em></p>
     <form action="/account/edit/save" method="post" name="profileEditForm" id="profileEditForm"
-          class="d-table m-auto" style="width: 100%; max-width: 500px">
-        <p>
+          class="d-table m-auto was-validated" style="width: 100%; max-width: 500px">
+        <p class="mb-3 mt-3">
             <label for="profileName" class="form-label">Nome:</label>
             <input type="text" name="name" id="profileName" class="form-control" required minlength="3"
                    value="${loggedUser.name}">
+            <div class="invalid-feedback">Deve ter pelo menos 3 caracteres.</div>
         </p>
         <p>
             <label for="profileEmail" class="form-label">E-mail:</label>
             <input type="email" name="email" id="profileEmail" class="form-control" required
                    value="${loggedUser.email}">
+            <div class="invalid-feedback">Tem que ser um e-mail válido.</div>
         </p>
         <p>
             <label for="profilePhoto" class="form-label">URL da foto:</label>
             <input type="text" name="photo" id="profilePhoto" class="form-control" required
                    value="${loggedUser.photo}">
+            <div class="invalid-feedback">Tem que ser a URL de ma imagem.</div>
         </p>
         <p>
             <button type="submit" class="btn btn-primary">Salvar Perfil</button>
@@ -40,19 +43,22 @@
     <h2>Senha de ${loggedUser.name}</h2>
     <p><em>Use este espaço para trocar a senha de entrada.</em></p>
     <form action="/account/password/save" method="post" name="passwordEditForm" id="passwordEditForm"
-          class="d-table m-auto" style="width: 100%; max-width: 300px">
+          class="d-table m-auto was-validated" style="width: 100%; max-width: 300px">
         <p>
             <label for="passwordActual" class="form-label">Senha atual:</label>
             <input type="password" name="actualPassword" id="passwordActual" class="form-control" required
                    minlength="7">
+        <div class="invalid-feedback">Deve ter pelo menos 7 caracteres.</div>
         </p>
         <p>
             <label for="passwordNew1" class="form-label">Nova senha:</label>
             <input type="password" name="newPassword1" id="passwordNew1" class="form-control" required minlength="7">
+        <div class="invalid-feedback">Deve ter pelo menos 7 caracteres.</div>
         </p>
         <p>
             <label for="passwordNew2" class="form-label">Repita a senha:</label>
             <input type="password" name="newPassword2" id="passwordNew2" class="form-control" required minlength="7">
+        <div class="invalid-feedback">Deve ter pelo menos 7 caracteres.</div>
         </p>
         <p>
             <button type="submit" class="btn btn-primary">Salvar Senha</button>

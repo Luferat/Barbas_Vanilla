@@ -5,27 +5,37 @@
         <small class="copyright text-center">${copyright}</small>
         <a href="#top" class="p-1 pt-3 text-light"><i class="fa-solid fa-circle-up fa-fw fa-2x"></i></a>
     </div>
-    <div class="container m-0 p-0 d-flex justify-content-around align-items-center mt-1 pb-4" style="border-top: 2px dotted grey;">
+    <div class="container m-0 p-0 d-flex justify-content-around align-items-center mt-1 pb-4"
+         style="border-top: 2px dotted grey;">
         <div class="d-flex flex-column pt-4 lh-lg">
             <h5>Redes Sociais</h5>
-            <a href="https://facebook.com" target="_blank" class="text-light ps-2"><i class="fa-brands fa-square-facebook fa-fw"></i> Facebook</a>
-            <a href="https://instagram.com" target="_blank" class="text-light ps-2"><i class="fa-brands fa-square-instagram fa-fw"></i> Instagram</a>
-            <a href="https://youtube.com" target="_blank" class="text-light ps-2"><i class="fa-brands fa-square-youtube fa-fw"></i> Youtube</a>
-            <a href="https://github.com" target="_blank" class="text-light ps-2"><i class="fa-brands fa-square-github fa-fw"></i> GitHub</a>
+            <a href="https://facebook.com" target="_blank" class="text-light ps-2"><i
+                    class="fa-brands fa-square-facebook fa-fw"></i> Facebook</a>
+            <a href="https://instagram.com" target="_blank" class="text-light ps-2"><i
+                    class="fa-brands fa-square-instagram fa-fw"></i> Instagram</a>
+            <a href="https://youtube.com" target="_blank" class="text-light ps-2"><i
+                    class="fa-brands fa-square-youtube fa-fw"></i> Youtube</a>
+            <a href="https://github.com" target="_blank" class="text-light ps-2"><i
+                    class="fa-brands fa-square-github fa-fw"></i> GitHub</a>
         </div>
         <div class="d-flex flex-column pt-4 lh-lg">
             <h5>Acesso rápido</h5>
             <a href="/about#site" target="_blank" class="text-light ps-2"><i class="fa-solid fa-globe fa-fw"></i> O Site</a>
-            <a href="/about#authors" target="_blank" class="text-light ps-2"><i class="fa-solid fa-user-tie fa-fw"></i> Autores</a>
-            <a href="/privacy" target="_blank" class="text-light ps-2"><i class="fa-solid fa-user-lock fa-fw"></i> Privacidade</a>
-            <a href="/contacts" target="_blank" class="text-light ps-2"><i class="fa-solid fa-comments fa-fw"></i> Contatos</a>
+            <a href="/about#authors" target="_blank" class="text-light ps-2"><i class="fa-solid fa-user-tie fa-fw"></i>
+                Autores</a>
+            <a href="/privacy" target="_blank" class="text-light ps-2"><i class="fa-solid fa-user-lock fa-fw"></i>
+                Privacidade</a>
+            <a href="/contacts" target="_blank" class="text-light ps-2"><i class="fa-solid fa-comments fa-fw"></i>
+                Contatos</a>
         </div>
     </div>
 </footer>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<#if pageJS??><script src="${pageJS}"></script></#if>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+<#if pageJS??>
+<script src="${pageJS}"></script></#if>
 
 <#if !loggedUser??>
 <#-- Pop-up de login -->
@@ -75,7 +85,9 @@
 <#-- Popup para mensagens de sucesso -->
 <dialog id="successDialog" class="border border-1 border-success rounded-3 bg-dark text-success pb-0">
     <p>${success}</p>
-    <p class="text-center"><button onclick="closeModal('successDialog')" class="btn btn-outline-success btn-sm">Fechar</button></p>
+    <p class="text-center">
+        <button onclick="closeModal('successDialog')" class="btn btn-outline-success btn-sm">Fechar</button>
+    </p>
 </dialog>
 <script>openModal('successDialog')</script>
 </#if>
@@ -84,7 +96,9 @@
 <#-- Popup para mensagens de erro -->
 <dialog id="errorDialog" class="border border-1 border-danger rounded-3 bg-dark text-danger pb-0">
     <p>${error}</p>
-    <p class="text-center"><button onclick="closeModal('errorDialog')" class="btn btn-outline-danger btn-sm">Fechar</button></p>
+    <p class="text-center">
+        <button onclick="closeModal('errorDialog')" class="btn btn-outline-danger btn-sm">Fechar</button>
+    </p>
 </dialog>
 <script>openModal('errorDialog')</script>
 </#if>
