@@ -1,0 +1,3 @@
+2025-04-24 18:33:18.466818-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]ACCOUNT ACCOUNT"; expected "ALTER, ANALYZE"; SQL statement:
+ACCOUNT ACCOUNT [42001-232]

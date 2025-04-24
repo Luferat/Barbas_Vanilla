@@ -13,25 +13,34 @@
         <code>Nascimento</code>,
         <code>função</code>
         e <code>CPF</code> não podem ser editados. Entre em contato com o suporte para saber mais.</em></p>
+    <p class="text-center">
+        <img src="${loggedUser.photo}" style="width:100%;max-width:300px;display:block;margin:auto;border-radius:1rem"
+             alt="${loggedUser.name}">
+        <a href="#changePhoto" class="btn btn-primary mt-1 btn-sm" id="changePhoto"><i
+                class="fa-solid fa-image fa-fw"></i> Trocar</a>
+    </p>
+
+    <hr>
+
     <form action="/account/edit/save" method="post" name="profileEditForm" id="profileEditForm"
           class="d-table m-auto was-validated" style="width: 100%; max-width: 500px">
         <p class="mb-3 mt-3">
             <label for="profileName" class="form-label">Nome:</label>
             <input type="text" name="name" id="profileName" class="form-control" required minlength="3"
                    value="${loggedUser.name}">
-            <div class="invalid-feedback">Deve ter pelo menos 3 caracteres.</div>
+        <div class="invalid-feedback">Deve ter pelo menos 3 caracteres.</div>
         </p>
         <p>
             <label for="profileEmail" class="form-label">E-mail:</label>
             <input type="email" name="email" id="profileEmail" class="form-control" required
                    value="${loggedUser.email}">
-            <div class="invalid-feedback">Tem que ser um e-mail válido.</div>
+        <div class="invalid-feedback">Tem que ser um e-mail válido.</div>
         </p>
         <p>
             <label for="profilePhoto" class="form-label">URL da foto:</label>
             <input type="text" name="photo" id="profilePhoto" class="form-control" required
                    value="${loggedUser.photo}">
-            <div class="invalid-feedback">Tem que ser a URL de ma imagem.</div>
+        <div class="invalid-feedback">Tem que ser a URL de ma imagem.</div>
         </p>
         <p>
             <button type="submit" class="btn btn-primary">Salvar Perfil</button>
@@ -66,5 +75,26 @@
     </form>
 
 </article>
+
+<dialog id="photoDialog" class="border-0 rounded-3 bg-dark text-light">
+    <form method="post" id="photoForm" class="p-2 pd-0" action="/account/photo" enctype="multipart/form-data">
+        <h5>Foto de Perfil</h5>
+        <#if photoError??>
+        <p class="text-danger mb-2" id="photoError">${photoError}</p>
+        <script>
+            document.getElementById('photoDialog').showModal();
+            let close = setTimeout(()=>{$('#photoDialog').hide();}, 5000);
+        </script>
+    </#if>
+    <p>
+        <label for="photoFile">Selecione a foto:</label>
+        <input type="file" class="form-control" id="photoFile" name="file" required>
+    </p>
+    <p class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary me-2" id="closeDialog">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </p>
+    </form>
+</dialog>
 
 <#include "../_footer.html">
