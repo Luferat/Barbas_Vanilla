@@ -40,7 +40,6 @@ public class NoAccountController {
     public String saveNewAccount(
             @RequestParam String name,
             @RequestParam String email,
-            @RequestParam String photo,
             @RequestParam String birth,
             @RequestParam String cpf,
             @RequestParam String password1,
@@ -73,7 +72,7 @@ public class NoAccountController {
         Account newAccount = new Account();
         newAccount.setName(name);
         newAccount.setEmail(email);
-        newAccount.setPhoto(photo);
+        newAccount.setPhoto("/photo/anonimous.png");
         newAccount.setCpf(cpf);
         newAccount.setBirth(LocalDate.parse(birth));
         newAccount.setPassword(BCryptUtil.encode(password1));

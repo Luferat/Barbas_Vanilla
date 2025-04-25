@@ -149,7 +149,6 @@ public class AccountController {
     public String saveProfileEdit(
             @RequestParam String name,
             @RequestParam String email,
-            @RequestParam String photo,
             HttpServletRequest request,
             RedirectAttributes redirectAttributes
     ) {
@@ -166,7 +165,6 @@ public class AccountController {
         try {
             user.setName(name);
             user.setEmail(email);
-            user.setPhoto(photo);
 
             accountRepository.save(user);
 

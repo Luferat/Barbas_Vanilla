@@ -21,30 +21,29 @@
         </div>
 
         <div class="mb-3">
-            <label for="newPhoto" class="form-label">URL da foto:</label>
-            <input type="text" name="photo" id="newPhoto" required class="form-control">
-        </div>
-
-        <div class="mb-3">
             <label for="newBirth" class="form-label">Nascimento:</label>
             <input type="date" id="newBirth" name="birth" required class="form-control">
+            <div class="invalid-feedback">Tem que ser uma data válida.</div>
         </div>
 
         <div class="mb-3">
             <label for="newCpf" class="form-label">CPF:</label>
             <input type="text" name="cpf" id="newCpf" required class="form-control" minlength="11" maxlength="14">
+            <div class="invalid-feedback">Tem que ser um CPF válido.</div>
         </div>
         <hr>
         <div class="mb-3">
             <label for="newPassword1" class="form-label">Senha:</label>
             <input type="password" name="password1" id="newPassword1" required class="form-control" minlength="7"
                    style="width:100%;max-width:300px">
+            <div class="invalid-feedback">Senha inválida.</div>
         </div>
 
         <div class="mb-3">
             <label for="newPassword2" class="form-label">Repita a senha:</label>
             <input type="password" name="password2" id="newPassword2" required class="form-control" minlength="7"
                    style="width:100%;max-width:300px">
+            <div class="invalid-feedback">Senha inválida.</div>
         </div>
         <p>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
