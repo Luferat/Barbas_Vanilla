@@ -5,7 +5,8 @@ import com.barbas.www.repository.AccountRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.Set;
 
@@ -43,12 +44,37 @@ public class AuthUtil {
         return allowedSet.contains(userOpt.get().getRole());
     }
 
+    public static void updateAccountDataCookie(HttpServletResponse response, Account account) {
+        // Cria o cookie 'accountdata' com a foto e role atualizados
+        String accountDataJson = String.format("{\"id\":%d, \"name\":\"%s\", \"photo\":\"%s\", \"role\":\"%s\"}",
+                account.getId(),
+                account.getName(),
+                account.getPhoto(),
+                account.getRole().name());
+
+        Cookie accountDataCookie = new Cookie("accountdata", URLEncoder.encode(accountDataJson, StandardCharsets.UTF_8));
+        accountDataCookie.setMaxAge(3600 * 24); // Exemplo de 1 dia de duração
+        accountDataCookie.setPath("/");
+        accountDataCookie.setHttpOnly(false); // Permitido acesso pelo front-end
+        accountDataCookie.setSecure(true); // Para HTTPS
+        response.addCookie(accountDataCookie);
+    }
+
     public static void deleteAccountCookie(HttpServletResponse response) {
-        Cookie removeCookie = new Cookie("account", "");
-        removeCookie.setMaxAge(0);
-        removeCookie.setPath("/");
-        removeCookie.setHttpOnly(true);
-        removeCookie.setSecure(true);
-        response.addCookie(removeCookie);
+        // Remover o cookie 'account'
+        Cookie removeCookieAccount = new Cookie("account", "");
+        removeCookieAccount.setMaxAge(0);
+        removeCookieAccount.setPath("/");
+        removeCookieAccount.setHttpOnly(true);
+        removeCookieAccount.setSecure(true);
+        response.addCookie(removeCookieAccount);
+
+        // Remover o cookie 'accountdata'
+        Cookie removeCookieAccountData = new Cookie("accountdata", "");
+        removeCookieAccountData.setMaxAge(0);
+        removeCookieAccountData.setPath("/");
+        removeCookieAccountData.setHttpOnly(false); // O cookie 'accountdata' é acessível pelo front-end
+        removeCookieAccountData.setSecure(true); // Manter como seguro
+        response.addCookie(removeCookieAccountData);
     }
 }

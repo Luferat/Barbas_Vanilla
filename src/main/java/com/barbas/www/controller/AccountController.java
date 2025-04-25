@@ -33,7 +33,6 @@ public class AccountController {
 
     private final Config config;
     private final AccountRepository accountRepository;
-    private Account account;
 
     @PostMapping("/login")
     public String doLogin(
@@ -259,7 +258,7 @@ public class AccountController {
             Path destination = uploadDir.resolve(filename);
             file.transferTo(destination);
 
-            account = AuthUtil.getLoggedUser(request, accountRepository).orElse(null);
+            Account account = AuthUtil.getLoggedUser(request, accountRepository).orElse(null);
             assert account != null;
             account.setPhoto("/account/uploads/" + filename);
             accountRepository.save(account);
