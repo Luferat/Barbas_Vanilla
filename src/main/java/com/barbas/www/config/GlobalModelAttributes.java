@@ -23,6 +23,7 @@ public class GlobalModelAttributes {
     public void addGlobalAttributes(Model model, HttpServletRequest request, HttpServletResponse response) {
         model.addAttribute("logo", config.getLogo());
         model.addAttribute("copyright", config.getCopyright());
+        model.addAttribute("all", config.getAll());
 
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
