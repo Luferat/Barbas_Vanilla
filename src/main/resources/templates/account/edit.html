@@ -37,6 +37,12 @@
         <div class="invalid-feedback">Tem que ser um e-mail válido.</div>
         </p>
         <p>
+            <label for="profileTel" class="form-label">Telefone(s):</label>
+            <input type="text" name="tel" id="profileTel" class="form-control" required
+                   value="${loggedUser.tel}">
+        <div class="invalid-feedback">Tem que ser um ou mais telefones válidos.</div>
+        </p>
+        <p>
             <button type="submit" class="btn btn-primary">Salvar Perfil</button>
         </p>
     </form>

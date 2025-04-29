@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" href="/img/logo.jpg">
-    <#if pageCSS??>
-    <link rel="stylesheet" href="${pageCSS}">
-</#if>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" crossorigin="anonymous"
-        referrerpolicy="no-referrer"></script>
+    <#if pageCSS??><link rel="stylesheet" href="${pageCSS}"></#if>
 <title>${title}</title>
 </head>
 
@@ -39,33 +35,28 @@
                             <li><a class="dropdown-item p-2" href="/about#project">Sobre o Barbas Vanilla</a></li>
                             <li><a class="dropdown-item p-2" href="/about#site">Sobre o Site</a></li>
                             <li><a class="dropdown-item p-2" href="/about#authors">Sobre os Autores</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item p-2" href="/privacy">Políticas de Privacidade</a></li>
                             <li><a class="dropdown-item p-2" href="/contacts">Faça Contato</a></li>
                         </ul>
                     </li>
                     <li class="nav-item ms-lg-auto" id="userInOut">
                         <#if loggedUser??>
-                        <a href="/account/profile" class="nav-link">
-                            <img src="${loggedUser.photo}" alt="${loggedUser.name}" class="logged"
-                                 referrerpolicy="no-referrer">
-                            ${loggedUser.firstName}
-                        </a>
+                            <a href="/account/profile" class="nav-link">
+                                <img src="${loggedUser.photo}" alt="${loggedUser.name}" class="logged" referrerpolicy="no-referrer">
+                                ${loggedUser.firstName}
+                            </a>
                         <#else>
-                        <span class="nav-link">
-    <img src="/img/anonimous_bg_alfa.png" alt="Anônimo" class="anominimous">Entrar
-</span>
-                    </#if>
-
+                            <span class="nav-link">
+                                <img src="/img/anonimous_bg_alfa.png" alt="Anônimo" class="anominimous">
+                                Entrar
+                            </span>
+                        </#if>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-1" type="search" placeholder="Procurar..." aria-label="Procurar"
-                           style="min-width: 150px !important;" name="q">
-                    <button class="btn btn-outline-light" type="submit"><i
-                            class="fa-solid fa-magnifying-glass fa-fw"></i></button>
+                    <input class="form-control me-1" type="search" placeholder="Procurar..." aria-label="Procurar" style="min-width: 150px !important;" name="q">
+                    <button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-magnifying-glass fa-fw"></i></button>
                 </form>
             </div>
         </div>
