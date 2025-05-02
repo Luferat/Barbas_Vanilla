@@ -4,11 +4,9 @@ import com.barbas.www.model.Account;
 import com.barbas.www.repository.AccountRepository;
 import com.barbas.www.util.AuthUtil;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,8 +28,6 @@ public class PhotoController {
     @PostMapping("/photo")
     public String uploadPhoto(
             @RequestParam("file") MultipartFile file,
-            Model model,
-            HttpServletResponse response,
             HttpServletRequest request,
             RedirectAttributes redirectAttributes
     ) {

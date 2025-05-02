@@ -29,8 +29,7 @@ public class LoginOutController {
             @RequestParam String password,
             HttpServletResponse response,
             HttpServletRequest request,
-            RedirectAttributes redirectAttributes,
-            Model model
+            RedirectAttributes redirectAttributes
     ) {
 
         // GUARD - NOT logged user only
