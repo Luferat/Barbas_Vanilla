@@ -1,4 +1,4 @@
-package com.barbas.www.controller;
+package com.barbas.www.controller.account;
 
 import com.barbas.www.config.Config;
 import com.barbas.www.model.Account;
@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/account")
-public class NoAccountController {
+public class NewController {
 
     private final Config config;
     private final AccountRepository accountRepository;
@@ -84,63 +83,5 @@ public class NoAccountController {
 
         redirectAttributes.addFlashAttribute("success", "Cadastro realizado com sucesso! Faça login para começar.");
         return "redirect:/";
-    }
-
-    @GetMapping("/password")
-    public String passwordRecovery(Model model, HttpServletRequest request) {
-        if (AuthUtil.isLogged(request, accountRepository)) {
-            return "redirect:/";
-        }
-        model.addAttribute("title", config.getName() + " - Recuperar Senha");
-        return "account/password";
-    }
-
-    @PostMapping("/password/recovery")
-    public String processPasswordRecovery(
-            @RequestParam String birth,
-            @RequestParam String email,
-            @RequestParam String cpf,
-            Model model,
-            HttpServletRequest request) {
-
-        if (AuthUtil.isLogged(request, accountRepository)) {
-            return "redirect:/";
-        }
-
-        LocalDate birthDate;
-        try {
-            birthDate = LocalDate.parse(birth);
-        } catch (Exception e) {
-            model.addAttribute("title", config.getName() + " - Recuperar Senha");
-            model.addAttribute("error", "Data de nascimento inválida.");
-            return "account/password";
-        }
-
-        Account account = accountRepository.findByEmailAndCpfAndBirth(email, cpf, birthDate);
-
-        if (account == null) {
-            model.addAttribute("title", config.getName() + " - Recuperar Senha");
-            model.addAttribute("error", "Usuário não encontrado. Verifique os dados e tente novamente.");
-            return "account/password";
-        }
-
-        String newPassword = generateRandomPassword();
-        account.setPassword(BCryptUtil.encode(newPassword));
-        accountRepository.save(account);
-
-        model.addAttribute("title", config.getName() + " - Recuperar Senha");
-        model.addAttribute("success", "Nova senha gerada com sucesso! Guarde-a com segurança e troque-a no próximo login: <code>" + newPassword + "</code>");
-        return "account/password";
-    }
-
-    private String generateRandomPassword() {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        SecureRandom random = new SecureRandom();
-        int length = random.nextInt(4) + 7; // entre 7 e 10
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            sb.append(chars.charAt(random.nextInt(chars.length())));
-        }
-        return sb.toString();
     }
 }
