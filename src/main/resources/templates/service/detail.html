@@ -1,0 +1,65 @@
+<#assign title = title + " - " + service.title>
+<#include "../_header.html">
+
+<#-- Criando lista de fotos válidas -->
+<#assign photos = []>
+<#if service.photo1?has_content><#assign photos += [service.photo1]></#if>
+<#if service.photo2?has_content><#assign photos += [service.photo2]></#if>
+<#if service.photo3?has_content><#assign photos += [service.photo3]></#if>
+<#if service.photo4?has_content><#assign photos += [service.photo4]></#if>
+
+<article class="container flex-grow-1 content text-light pt-2">
+
+    <h2>${service.title}</h2>
+
+<#if (photos?size > 0)>
+
+    <div id="servicePhotos" class="carousel slide" data-bs-ride="carousel" style="width: 100%; max-width: 400px; margin: auto;">
+
+        <div class="carousel-indicators">
+            <#list photos as photo>
+                <#if photo?index == 0>
+                    <button type="button" data-bs-target="#servicePhotos" data-bs-slide-to="${photo?index}" class="active"></button>
+                <#else>
+                    <button type="button" data-bs-target="#servicePhotos" data-bs-slide-to="${photo?index}"></button>
+                </#if>
+            </#list>
+        </div>
+
+        <div class="carousel-inner">
+            <#list photos as photo>
+                <#if photo?index == 0>
+                    <div class="carousel-item active"><img src="${photo}" alt="${service.title} Foto ${photo?index + 1}" class="d-block w-100"></div>
+                <#else>
+                    <div class="carousel-item"><img src="${photo}" alt="${service.title} Foto ${photo?index + 1}" class="d-block w-100"></div>
+                </#if>
+            </#list>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#servicePhotos" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+        <button class="carousel-control-next" type="button" data-bs-target="#servicePhotos" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+
+    </div>
+&nbsp;
+</#if>
+
+<p><strong>Descrição:</strong> ${service.description}</p>
+<p><strong>Preço:</strong> R$ ${service.price?string("0.00")}</p>
+
+<#if relatedAccounts??>
+<h4>Profissionais</h4>
+<ul style="list-style: none; line-height: 3">
+    <#list relatedAccounts as acc>
+    <li>
+        <#if acc.photo?has_content>
+        <img src="${acc.photo}" alt="${acc.name}" style="height:32px;width:32px;border-radius:50%;">
+    </#if>
+    ${acc.name}
+    </li>
+</#list>
+</ul>
+</#if>
+
+</article>
+
+<#include "../_footer.html">

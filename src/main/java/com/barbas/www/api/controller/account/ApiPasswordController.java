@@ -20,7 +20,7 @@ import static com.barbas.www.util.AuthUtil.getLoggedUser;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
-public class Password {
+public class ApiPasswordController {
 
     private final AccountRepository accountRepository;
 

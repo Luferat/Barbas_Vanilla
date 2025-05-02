@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
-public class Edit {
+public class ApiEditController {
 
     private final AccountRepository accountRepository;
 

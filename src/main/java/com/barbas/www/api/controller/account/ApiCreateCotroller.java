@@ -20,7 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
-public class Create {
+public class ApiCreateCotroller {
 
     private final AccountRepository accountRepository;
 

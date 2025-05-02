@@ -22,7 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
-public class Login {
+public class ApiLoginController {
 
     private final AccountRepository accountRepository;
     private final Config config;

@@ -17,7 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
-public class Logout {
+public class ApiLogoutController {
 
     private final AccountRepository accountRepository;
 

@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
-public class Profile {
+public class ApiProfileController {
 
     private final AccountRepository accountRepository;
 

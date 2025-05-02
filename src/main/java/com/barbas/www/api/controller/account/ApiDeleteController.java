@@ -20,7 +20,7 @@ import static com.barbas.www.util.AuthUtil.getLoggedUser;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
-public class Delete {
+public class ApiDeleteController {
 
     private final AccountRepository accountRepository;
 

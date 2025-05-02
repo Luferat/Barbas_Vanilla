@@ -22,7 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
-public class Photo {
+public class ApiPhotoController {
 
     private final AccountRepository accountRepository;
     private final Config config;

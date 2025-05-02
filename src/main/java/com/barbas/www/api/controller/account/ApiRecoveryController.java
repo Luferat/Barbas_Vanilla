@@ -20,7 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
-public class Recovery {
+public class ApiRecoveryController {
 
     private final AccountRepository accountRepository;
 

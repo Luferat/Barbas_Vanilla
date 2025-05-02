@@ -1,21 +1,62 @@
 <#include "_header.html">
 
+<#-- Máximo de caracteres na "description" -->
+<#assign max_char = 50>
+
+<#macro addChar char, count>
+<#list 1..count as i>
+${char}
+</#list>
+</#macro>
+
 <header class="container-fluid topbanner m-0 p-0">
 
     <div class="header-flex">
         <div class="header-flex-img"><img src="/img/barbershop-trim.jpg" alt="Barbas Vanilla"></div>
         <div class="header-flex-text">
             <h2>Barba´s Vanilla</h2>
-            <p>Experiência, estilo e precisão! No Barbas Vanilla, cada corte é uma obra de arte, e cada barba recebe o cuidado que merece. </p>
+            <p>Experiência, estilo e precisão! No Barbas Vanilla, cada corte é uma obra de arte, e cada barba recebe o
+               cuidado que merece. </p>
         </div>
     </div>
 
 </header>
 
-<article class="container flex-grow-1 content text-light pt-2">
+<article class="container flex-grow-1 content text-light pt-2 pb-2">
 
-    <h2>Olá!</h2>
-    <p>Você está na página inicial...</p>
+    <h2>Nossos Serviços</h2>
+    <#if services?has_content>
+
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+        <#list services as service>
+        <a href="/service/detail/${service.id}" class="text-decoration-none text-reset">
+            <div class="card bg-dark text-light d-block card-hover" style="width: 280px;">
+                <#if service.photo1?has_content>
+                <img src="${service.photo1}" class="card-img-top" alt="${service.title}">
+            </#if>
+            <div class="card-body">
+                <h5 class="card-title">${service.title}</h5>
+
+                <p class="card-text">
+                    <#if (service.description?length > max_char)>
+                    ${service.description?substring(0, max_char)}...
+                    <#else>
+                    <#assign fill_char = max_char - service.description?length + 3>
+                    ${service.description}
+                    <@addChar char="&nbsp; " count=fill_char/>
+                </#if>
+                </p>
+
+                <p class="card-text fw-bold">R$ ${service.price?string("0.00")}</p>
+            </div>
+    </div>
+    </a>
+</#list>
+</div>
+
+<#else>
+<p class="text-center">Nenhum serviço disponível no momento.</p>
+</#if>
 
 </article>
 
