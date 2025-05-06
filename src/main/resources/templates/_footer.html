@@ -26,7 +26,7 @@
             <a href="/about#site" class="text-light ps-2"><i class="fa-solid fa-globe fa-fw"></i> O Site</a>
             <a href="/about#authors" class="text-light ps-2"><i class="fa-solid fa-user-tie fa-fw"></i> Autores</a>
             <a href="/privacy" class="text-light ps-2"><i class="fa-solid fa-user-lock fa-fw"></i> Privacidade</a>
-            <a href="/contacts" class="text-light ps-2"><i class="fa-solid fa-comments fa-fw"></i> Contatos</a>
+            <a href="/contact" class="text-light ps-2"><i class="fa-solid fa-comments fa-fw"></i> Contatos</a>
         </div>
     </div>
 </footer>
@@ -37,6 +37,7 @@
 <script>
     function openModal(modalId) { $('#' + modalId)[0].showModal(); }
     function closeModal(modalId) { $('#' + modalId)[0].close(); }
+    if (window.history.replaceState) { window.history.replaceState(null, null, window.location.href); }
 </script>
 <#if pageJS??><script src="${pageJS}"></script></#if>
 

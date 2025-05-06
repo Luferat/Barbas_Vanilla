@@ -2,9 +2,11 @@
 DELETE FROM employe_service;
 DELETE FROM service;
 DELETE FROM account;
+DELETE FROM contact;
 ALTER TABLE employe_service ALTER COLUMN id RESTART WITH 1;
 ALTER TABLE service ALTER COLUMN id RESTART WITH 1;
 ALTER TABLE account ALTER COLUMN id RESTART WITH 1;
+ALTER TABLE contact ALTER COLUMN id RESTART WITH 1;
 
 -- A senha para todos é "Senha123" e está criptografada em BCrypt
 INSERT INTO account (BIRTH, CPF, CREATED_AT, EMAIL, NAME, PHOTO, ROLE, TEL, PASSWORD, STATUS) VALUES

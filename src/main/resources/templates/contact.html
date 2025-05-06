@@ -1,0 +1,51 @@
+<#include "_header.html">
+
+<article class="container flex-grow-1 content text-light pt-2">
+
+    <div class="d-flex" style="width:100%;max-width:968px;margin:auto;gap:3rem">
+
+        <form method="post" action="/contact" class="was-validated">
+
+            <h2>Faça Contato</h2>
+
+            <p>Preencha todos os campos abaixo para entrar em contato com a equipe <em>${all.name}</em>.</p>
+
+            <div class="mb-3 mt-3">
+                <label for="name" class="form-label">Nome:</label>
+                <input type="text" class="form-control" id="name" placeholder="Seu nome completo" name="name" required minlength="3" value="${name!}">
+                <div class="invalid-feedback">Preencha seu nome completo.</div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="email" class="form-label">E-mail:</label>
+                <input type="email" class="form-control" id="email" placeholder="Seu e-mail de contato" name="email" required value="${email!}">
+                <div class="invalid-feedback">Preencha seu e-mail de contato.</div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="subject" class="form-label">Assunto:</label>
+                <input type="text" class="form-control" id="subject" placeholder="Sua mensagem" name="subject" required minlength="4">
+                <div class="invalid-feedback">Deve ter 4 ou mais caracteres.</div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="message" class="form-label">Mensagem:</label>
+                <textarea class="form-control" id="message" name="message" placeholder="Sua mensagem de contato" rows="5" required minlength="5"></textarea>
+                <div class="invalid-feedback">Deve ter 5 ou mais caracteres.</div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+
+        </form>
+
+    <aside style="min-width:280px;max-width:280px">
+        <h3>Mais Contatos</h3>
+        <p>Você também pode nos conhecer e entrar em contato pelas redes sociais:</p>
+    </aside>
+    </div>
+
+</article>
+
+<#include "_footer.html">
