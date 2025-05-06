@@ -1,4 +1,4 @@
-package com.barbas.www.controller.pages;
+package com.barbas.www.controller.page;
 
 import com.barbas.www.config.Config;
 import com.barbas.www.model.Account;
