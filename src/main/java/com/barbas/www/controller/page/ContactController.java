@@ -23,6 +23,7 @@ public class ContactController {
     @GetMapping("/contact")
     public String contact(Model model, HttpServletRequest request) {
         model.addAttribute("title", config.getName() + " - Faça Contato");
+        model.addAttribute("pageCSS", "/css/contact.css");
         AuthUtil.getLoggedUser(request, accountRepository).ifPresent(account -> {
             model.addAttribute("name", account.getName());
             model.addAttribute("email", account.getEmail());
@@ -52,6 +53,7 @@ public class ContactController {
 
             model.addAttribute("success", "Contato enviado com sucesso!");
             model.addAttribute("title", config.getName() + " - Faça Contato");
+            model.addAttribute("pageCSS", "/css/contact.css");
             AuthUtil.getLoggedUser(request, accountRepository).ifPresent(account -> {
                 model.addAttribute("name", account.getName());
                 model.addAttribute("email", account.getEmail());

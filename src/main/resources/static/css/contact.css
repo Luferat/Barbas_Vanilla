@@ -1,0 +1,32 @@
+.contact-div {
+    width: 100%;
+    margin:auto;
+    gap:3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-div form {
+    padding-top: 1rem;
+    width: 100%;
+}
+
+.contact-div aside {}
+
+@media (min-width: 960px) {
+    .contact-div {
+        flex-direction: row;
+        max-width: 960px;
+        margin: auto;
+    }
+
+    .contact-div form {
+        flex-grow: 1;
+    }
+
+    .contact-div aside {
+        padding-top: 1rem;
+        min-width: 280px;
+        max-width: 280px;
+    }
+}
