@@ -1,0 +1,337 @@
+{
+	"info": {
+		"_postman_id": "f107502f-29ab-4fa7-9a8f-60ceb0183632",
+		"name": "Barba's Vanilla Inner API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "11187433"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "joca@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Senha123",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/api/account/login",
+						"description": "Body: form-data\r\nemail=...\r\npassword=...\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/account/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "Profile",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/account/profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profile",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Joca da Silva",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "joca@email.com\n",
+									"type": "text"
+								},
+								{
+									"key": "tel",
+									"value": "(21) 99887-7665",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/api/account/edit",
+						"description": "Body: form-data\r\nname = ...\r\nemail = ..."
+					},
+					"response": []
+				},
+				{
+					"name": "Password Change",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "actualPassword",
+									"value": "Senha123",
+									"type": "text"
+								},
+								{
+									"key": "newPassword1",
+									"value": "Senha123",
+									"type": "text"
+								},
+								{
+									"key": "newPassword2",
+									"value": "Senha123",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/api/account/password",
+						"description": "Body: form-data\r\nactualPassword = ...\r\nnewPassword1 = ...\r\nnewPassword2 = ...  // Repetição de `newPassword1`"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/account/delete",
+						"description": "Altera para \\`Account.status.DEL\\`."
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Photo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Luferat/Documents/java/Barbas_Vanilla/src/main/resources/static/photo/1.jpg"
+								}
+							]
+						},
+						"url": "http://localhost:8080/api/account/photo"
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Jocasta Siriliano",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "jocasta@email.com",
+									"type": "text"
+								},
+								{
+									"key": "birth",
+									"value": "1997-12-15",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": "99988877701",
+									"type": "text"
+								},
+								{
+									"key": "password1",
+									"value": "Senha123",
+									"type": "text"
+								},
+								{
+									"key": "password2",
+									"value": "Senha123",
+									"type": "text"
+								},
+								{
+									"key": "tel",
+									"value": "(21) 99887-7665",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/api/account/create",
+						"description": "Body: form-data\r\nname = ... \r\nemail = ...\r\nbirth = ... \r\ncpf = ... \r\npassword1 = ... \r\npassword1 = ... // Repetição de `password1`\r\ntel = ..."
+					},
+					"response": []
+				},
+				{
+					"name": "Recovery Password",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "birth",
+									"value": "2000-11-12",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "joca@email.com",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": "999.888.777-66",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8080/api/account/recovery"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "List All",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/service/all"
+					},
+					"response": []
+				},
+				{
+					"name": "List One By Id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/service/3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact (x-www-form-urlencoded)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Joca do Contato",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "joca@contato.com",
+							"type": "text"
+						},
+						{
+							"key": "subject",
+							"value": "Assunto do contato do Joca",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "Mensagem do contato do Joca",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8080/api/contact"
+			},
+			"response": []
+		},
+		{
+			"name": "Contact (JSON)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Joca do Contato\",\r\n    \"email\": \"joca@contato.com\",\r\n    \"subject\": \"Assunto do contato do Joca\",\r\n    \"message\": \"Mensagem do contato do Joca\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/contact"
+			},
+			"response": []
+		}
+	]
+}
