@@ -1,10 +1,10 @@
 package com.barbas.api.service;
 
 import com.barbas.core.model.Account;
-import com.barbas.core.model.EmployeService;
+import com.barbas.core.model.AccountService;
 import com.barbas.core.model.Service;
 import com.barbas.core.repository.AccountRepository;
-import com.barbas.core.repository.EmployeServiceRepository;
+import com.barbas.core.repository.AccountServiceRepository;
 import com.barbas.core.repository.ServiceRepository;
 import com.barbas.core.util.AuthUtil;
 import com.barbas.core.util.JsonResponse;
@@ -24,7 +24,7 @@ import java.util.Optional;
 public class ApiListController {
 
     private final ServiceRepository serviceRepository;
-    private final EmployeServiceRepository employeServiceRepository;
+    private final AccountServiceRepository accountServiceRepository;
     private final AccountRepository accountRepository;
 
     @GetMapping("/all")
@@ -50,9 +50,9 @@ public class ApiListController {
         responseData.put("service", service);
 
         if (AuthUtil.isLogged(request, accountRepository)) {
-            List<EmployeService> links = employeServiceRepository.findByService(service);
+            List<AccountService> links = accountServiceRepository.findByService(service);
             List<Map<String, Object>> accounts = links.stream()
-                    .map(EmployeService::getEmploye)
+                    .map(AccountService::getEmploye)
                     .filter(acc -> acc.getStatus() == Account.Status.ON)
                     .map(acc -> {
                         Map<String, Object> a = new LinkedHashMap<>();

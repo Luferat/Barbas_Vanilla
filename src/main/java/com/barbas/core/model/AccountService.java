@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class EmployeService {
+public class AccountService {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

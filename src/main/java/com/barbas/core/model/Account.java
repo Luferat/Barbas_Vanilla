@@ -83,7 +83,6 @@ public class Account {
             case EMPLOYE -> "Colaborador";
             case ANALIST -> "Analista";
             case USER -> "Usuário regular";
-            default -> "Função desconhecida: " + this.role.name();
         };
     }
 }

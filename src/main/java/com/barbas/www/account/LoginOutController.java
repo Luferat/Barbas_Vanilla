@@ -63,7 +63,7 @@ public class LoginOutController {
     }
 
     @GetMapping("/logout")
-    public String accountLogout(Model model, HttpServletRequest request) {
+    public String doLogout(Model model, HttpServletRequest request) {
         // GUARD - Logged user only
         if (!AuthUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
@@ -73,7 +73,7 @@ public class LoginOutController {
     }
 
     @GetMapping("/logout/confirm")
-    public String accountLogoutConfirm(HttpServletResponse response, HttpServletRequest request) {
+    public String doLogoutConfirm(HttpServletResponse response, HttpServletRequest request) {
         // GUARD - Logged user only
         if (!AuthUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
