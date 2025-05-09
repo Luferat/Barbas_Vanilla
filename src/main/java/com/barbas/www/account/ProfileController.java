@@ -17,11 +17,12 @@ public class ProfileController {
 
     private final Config config;
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @GetMapping("/profile")
     public String showProfile(Model model, HttpServletRequest request) {
         // GUARD - Logged user only
-        if (!AuthUtil.isLogged(request, accountRepository)) {
+        if (!authUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
         }
         model.addAttribute("title", config.getName());

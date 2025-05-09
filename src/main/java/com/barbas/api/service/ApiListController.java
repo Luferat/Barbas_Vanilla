@@ -26,6 +26,7 @@ public class ApiListController {
     private final ServiceRepository serviceRepository;
     private final AccountServiceRepository accountServiceRepository;
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @GetMapping("/all")
     public ResponseEntity<?> listAllServices() {
@@ -49,7 +50,7 @@ public class ApiListController {
         Map<String, Object> responseData = new LinkedHashMap<>();
         responseData.put("service", service);
 
-        if (AuthUtil.isLogged(request, accountRepository)) {
+        if (authUtil.isLogged(request, accountRepository)) {
             List<AccountService> links = accountServiceRepository.findByService(service);
             List<Map<String, Object>> accounts = links.stream()
                     .map(AccountService::getEmploye)

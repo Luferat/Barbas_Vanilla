@@ -28,6 +28,7 @@ public class DetailController {
     private final ServiceRepository serviceRepository;
     private final AccountServiceRepository accountServiceRepository;
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Integer id, Model model, HttpServletRequest request) {
@@ -40,7 +41,7 @@ public class DetailController {
         model.addAttribute("service", service);
         model.addAttribute("title", config.getName() + " - " + service.getTitle());
 
-        if (AuthUtil.isLogged(request, accountRepository)) {
+        if (authUtil.isLogged(request, accountRepository)) {
             List<AccountService> links = accountServiceRepository.findByService(service);
             List<Account> relatedAccounts = links.stream()
                     .map(AccountService::getEmploye)

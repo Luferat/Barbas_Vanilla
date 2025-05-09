@@ -24,6 +24,7 @@ import java.util.UUID;
 public class PhotoController {
 
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @PostMapping("/photo")
     public String uploadPhoto(
@@ -32,7 +33,7 @@ public class PhotoController {
             RedirectAttributes redirectAttributes
     ) {
         // GUARD - Logged user only
-        if (!AuthUtil.isLogged(request, accountRepository)) {
+        if (!authUtil.isLogged(request, accountRepository)) {
             return "redirect:/";
         }
 
@@ -62,7 +63,7 @@ public class PhotoController {
             Path destination = uploadDir.resolve(filename);
             file.transferTo(destination);
 
-            Account account = AuthUtil.getLoggedUser(request, accountRepository).orElse(null);
+            Account account = authUtil.getLoggedUser(request, accountRepository).orElse(null);
             assert account != null;
             account.setPhoto("/account/uploads/" + filename);
             accountRepository.save(account);

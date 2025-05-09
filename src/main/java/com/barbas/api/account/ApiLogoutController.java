@@ -19,14 +19,15 @@ import java.util.Map;
 public class ApiLogoutController {
 
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @GetMapping("/logout")
     public ResponseEntity<Map<String, Object>> apiAccountLogoutConfirm(HttpServletResponse response, HttpServletRequest request) {
-        if (!AuthUtil.isLogged(request, accountRepository)) {
+        if (!authUtil.isLogged(request, accountRepository)) {
             return JsonResponse.error(400, "Nenhum usuário está logado no momento.");
         }
 
-        AuthUtil.deleteAccountCookie(response);
+        authUtil.deleteAccountCookie(response);
         return JsonResponse.success(200, "Logout efetuado com sucesso.");
     }
 }

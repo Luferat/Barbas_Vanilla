@@ -15,24 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.barbas.core.util.AuthUtil.getLoggedUser;
-
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
 public class ApiDeleteController {
 
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @GetMapping("/delete")
     public ResponseEntity<Map<String, Object>> accountDeleteConfirm(HttpServletResponse response, HttpServletRequest request) {
 
         // GUARD - Logged user only
-        if (!AuthUtil.isLogged(request, accountRepository)) {
+        if (!authUtil.isLogged(request, accountRepository)) {
             return JsonResponse.error(401, "Usuário não está logado.");
         }
 
-        Optional<Account> userOpt = getLoggedUser(request, accountRepository);
+        Optional<Account> userOpt = authUtil.getLoggedUser(request, accountRepository);
 
         if (userOpt.isPresent()) {
             Account user = userOpt.get();
@@ -41,7 +40,7 @@ public class ApiDeleteController {
             accountRepository.save(user);
 
             // Remove o cookie "account"
-            AuthUtil.deleteAccountCookie(response);
+            authUtil.deleteAccountCookie(response);
 
             // Retorna sucesso com mensagem
             return JsonResponse.success(200, "Conta apagada com sucesso.");

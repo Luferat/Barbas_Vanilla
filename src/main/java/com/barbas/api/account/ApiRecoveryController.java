@@ -23,6 +23,7 @@ import java.util.Map;
 public class ApiRecoveryController {
 
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @PostMapping("/recovery")
     public ResponseEntity<Map<String, Object>> processPasswordRecovery(
@@ -32,7 +33,7 @@ public class ApiRecoveryController {
             HttpServletRequest request) {
 
         // Verifica se o usuário já está logado
-        if (AuthUtil.isLogged(request, accountRepository)) {
+        if (authUtil.isLogged(request, accountRepository)) {
             return JsonResponse.error(400, "Usuário já está logado.");
         }
 

@@ -20,10 +20,12 @@ import java.util.Optional;
 public class ApiProfileController {
 
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
+
 
     @GetMapping("/profile")
     public ResponseEntity<Map<String, Object>> showProfile(HttpServletRequest request) {
-        Optional<Account> userOpt = AuthUtil.getLoggedUser(request, accountRepository);
+        Optional<Account> userOpt = authUtil.getLoggedUser(request, accountRepository);
 
         if (userOpt.isEmpty()) {
             return JsonResponse.error(401, "Usuário não está logado.");

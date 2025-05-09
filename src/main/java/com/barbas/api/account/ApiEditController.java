@@ -21,6 +21,8 @@ import java.util.Optional;
 public class ApiEditController {
 
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
+
 
     @PostMapping("/edit")
     public ResponseEntity<Map<String, Object>> saveProfileEdit(
@@ -29,7 +31,7 @@ public class ApiEditController {
             @RequestParam String tel,
             HttpServletRequest request
     ) {
-        Optional<Account> userOpt = AuthUtil.getLoggedUser(request, accountRepository);
+        Optional<Account> userOpt = authUtil.getLoggedUser(request, accountRepository);
 
         // GUARD - Logged Status.ON user only
         if (userOpt.isEmpty()) {

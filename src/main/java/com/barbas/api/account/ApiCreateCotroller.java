@@ -23,6 +23,7 @@ import java.util.Map;
 public class ApiCreateCotroller {
 
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @PostMapping("/create")
     public ResponseEntity<Map<String, Object>> saveNewAccount(
@@ -36,7 +37,7 @@ public class ApiCreateCotroller {
             HttpServletRequest request) {
 
         // Verifica se o usuário já está logado
-        if (AuthUtil.isLogged(request, accountRepository)) {
+        if (authUtil.isLogged(request, accountRepository)) {
             return JsonResponse.error(400, "Usuário já está logado.");
         }
 

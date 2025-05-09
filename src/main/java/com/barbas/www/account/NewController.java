@@ -25,10 +25,11 @@ public class NewController {
 
     private final Config config;
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @GetMapping("/new")
     public String newAccount(Model model, HttpServletRequest request) {
-        if (AuthUtil.isLogged(request, accountRepository)) {
+        if (authUtil.isLogged(request, accountRepository)) {
             return "redirect:/";
         }
         model.addAttribute("title", config.getName() + " - Novo usuário");
@@ -47,7 +48,7 @@ public class NewController {
             Model model,
             RedirectAttributes redirectAttributes) {
 
-        if (AuthUtil.isLogged(request, accountRepository)) {
+        if (authUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // já logado
         }
 

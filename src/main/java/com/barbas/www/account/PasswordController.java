@@ -19,8 +19,6 @@ import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static com.barbas.core.util.AuthUtil.getLoggedUser;
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/account")
@@ -28,6 +26,7 @@ public class PasswordController {
 
     private final Config config;
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @PostMapping("/password/save")
     public String savePasswordEdit(
@@ -37,7 +36,7 @@ public class PasswordController {
             HttpServletRequest request,
             RedirectAttributes redirectAttributes
     ) {
-        Optional<Account> userOpt = getLoggedUser(request, accountRepository);
+        Optional<Account> userOpt = authUtil.getLoggedUser(request, accountRepository);
 
         if (userOpt.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Acesso negado. Faça login para continuar.");
@@ -75,7 +74,7 @@ public class PasswordController {
 
     @GetMapping("/password")
     public String passwordRecovery(Model model, HttpServletRequest request) {
-        if (AuthUtil.isLogged(request, accountRepository)) {
+        if (authUtil.isLogged(request, accountRepository)) {
             return "redirect:/";
         }
         model.addAttribute("title", config.getName() + " - Recuperar Senha");
@@ -90,7 +89,7 @@ public class PasswordController {
             Model model,
             HttpServletRequest request) {
 
-        if (AuthUtil.isLogged(request, accountRepository)) {
+        if (authUtil.isLogged(request, accountRepository)) {
             return "redirect:/";
         }
 

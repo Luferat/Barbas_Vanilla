@@ -2,6 +2,7 @@ package com.barbas.api.account;
 
 import com.barbas.core.model.Account;
 import com.barbas.core.repository.AccountRepository;
+import com.barbas.core.util.AuthUtil;
 import com.barbas.core.util.BCryptUtil;
 import com.barbas.core.util.JsonResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.barbas.core.util.AuthUtil.getLoggedUser;
-
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/account")
 public class ApiPasswordController {
 
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
+
 
     @PostMapping("/password")
     public ResponseEntity<Map<String, Object>> savePasswordEdit(
@@ -31,7 +32,7 @@ public class ApiPasswordController {
             @RequestParam String newPassword2,
             HttpServletRequest request
     ) {
-        Optional<Account> userOpt = getLoggedUser(request, accountRepository);
+        Optional<Account> userOpt = authUtil.getLoggedUser(request, accountRepository);
 
         if (userOpt.isEmpty()) {
             return JsonResponse.error(401, "Acesso negado. Faça login para continuar.");

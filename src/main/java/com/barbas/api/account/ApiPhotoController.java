@@ -26,6 +26,8 @@ public class ApiPhotoController {
 
     private final AccountRepository accountRepository;
     private final Config config;
+    private final AuthUtil authUtil;
+
 
     @PostMapping("/photo")
     public ResponseEntity<Object> uploadPhoto(
@@ -34,7 +36,7 @@ public class ApiPhotoController {
             HttpServletRequest request
     ) {
         // GUARD - Logged user only
-        if (!AuthUtil.isLogged(request, accountRepository)) {
+        if (!authUtil.isLogged(request, accountRepository)) {
             return ResponseEntity
                     .status(401)
                     .body(Map.of("message", "Acesso negado. Faça login para continuar."));
@@ -69,13 +71,13 @@ public class ApiPhotoController {
             Path destination = uploadDir.resolve(filename);
             file.transferTo(destination);
 
-            Account account = AuthUtil.getLoggedUser(request, accountRepository).orElse(null);
+            Account account = authUtil.getLoggedUser(request, accountRepository).orElse(null);
             assert account != null;
             account.setPhoto("/account/uploads/" + filename);
             accountRepository.save(account);
 
             // Atualiza o cookie 'accountdata' com a nova foto e role
-            AuthUtil.updateAccountDataCookie(response, account);
+            authUtil.updateAccountDataCookie(response, account);
 
             return ResponseEntity
                     .status(200)

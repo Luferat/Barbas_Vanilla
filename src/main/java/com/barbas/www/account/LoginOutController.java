@@ -22,6 +22,7 @@ public class LoginOutController {
 
     private final Config config;
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @PostMapping("/login")
     public String doLogin(
@@ -33,7 +34,7 @@ public class LoginOutController {
     ) {
 
         // GUARD - NOT logged user only
-        if (AuthUtil.isLogged(request, accountRepository)) {
+        if (authUtil.isLogged(request, accountRepository)) {
             return "redirect:/";
         }
 
@@ -65,7 +66,7 @@ public class LoginOutController {
     @GetMapping("/logout")
     public String doLogout(Model model, HttpServletRequest request) {
         // GUARD - Logged user only
-        if (!AuthUtil.isLogged(request, accountRepository)) {
+        if (!authUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
         }
         model.addAttribute("title", config.getName());
@@ -75,10 +76,10 @@ public class LoginOutController {
     @GetMapping("/logout/confirm")
     public String doLogoutConfirm(HttpServletResponse response, HttpServletRequest request) {
         // GUARD - Logged user only
-        if (!AuthUtil.isLogged(request, accountRepository)) {
+        if (!authUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
         }
-        AuthUtil.deleteAccountCookie(response);
+        authUtil.deleteAccountCookie(response);
         return "redirect:/";
     }
 }

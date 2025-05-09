@@ -26,6 +26,7 @@ public class ApiLoginController {
 
     private final AccountRepository accountRepository;
     private final Config config;
+    private final AuthUtil authUtil;
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> apiLogin(
@@ -34,7 +35,7 @@ public class ApiLoginController {
             HttpServletResponse response,
             HttpServletRequest request
     ) {
-        if (AuthUtil.isLogged(request, accountRepository)) {
+        if (authUtil.isLogged(request, accountRepository)) {
             return JsonResponse.error(400, "Usuário já está logado.");
         }
 
@@ -51,13 +52,13 @@ public class ApiLoginController {
             if (BCryptUtil.matches(password, user.getPassword())) {
                 // Cria cookie seguro com ID do usuário
                 Cookie loginCookie = new Cookie("account", user.getId().toString());
-                loginCookie.setMaxAge(config.getCookieHoursAge() * 60 * 60);
+                loginCookie.setMaxAge(config.getCookieHoursAge() * 3600);
                 loginCookie.setHttpOnly(true);
                 loginCookie.setPath("/");
                 response.addCookie(loginCookie);
 
                 // Cria o cookie 'accountdata' com o role, nome e foto
-                AuthUtil.updateAccountDataCookie(response, user);
+                authUtil.updateAccountDataCookie(response, user);
 
                 return JsonResponse.success(200, "Login efetuado com sucesso.");
             }

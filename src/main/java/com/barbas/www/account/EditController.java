@@ -13,8 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
-import static com.barbas.core.util.AuthUtil.getLoggedUser;
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/account")
@@ -22,11 +20,12 @@ public class EditController {
 
     private final Config config;
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @GetMapping("/edit")
     public String accountEdit(Model model, HttpServletRequest request) {
         // GUARD - Logged user only
-        if (!AuthUtil.isLogged(request, accountRepository)) {
+        if (!authUtil.isLogged(request, accountRepository)) {
             return "redirect:/"; // Redireciona se não estiver logado
         }
         model.addAttribute("title", config.getName());
@@ -42,7 +41,7 @@ public class EditController {
             HttpServletRequest request,
             RedirectAttributes redirectAttributes
     ) {
-        Optional<Account> userOpt = getLoggedUser(request, accountRepository);
+        Optional<Account> userOpt = authUtil.getLoggedUser(request, accountRepository);
 
         // GUARD - Logged Status.ON user only
         if (userOpt.isEmpty()) {

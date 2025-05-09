@@ -16,12 +16,13 @@ public class ScheduleController {
 
     private final Config config;
     private final AccountRepository accountRepository;
+    private final AuthUtil authUtil;
 
     @GetMapping("/schedule")
     public String schedule(Model model, HttpServletRequest request) {
 
         // GUARD - Somente usuário logado com `role.USER`, `role.EMPLOYE` ou `role.ADMIN` pode acessar
-        if (!AuthUtil.isAllowed(request, accountRepository, Account.Role.ADMIN, Account.Role.EMPLOYE, Account.Role.USER)) {
+        if (!authUtil.isAllowed(request, accountRepository, Account.Role.ADMIN, Account.Role.EMPLOYE, Account.Role.USER)) {
             return "redirect:/"; // Bloqueia se não for um dos dois
         }
 
