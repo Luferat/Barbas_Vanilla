@@ -20,9 +20,9 @@ INSERT INTO account (BIRTH, CPF, CREATED_AT, EMAIL, NAME, PHOTO, ROLE, TEL, PASS
 
 -- A senha para todos é "Senha123" e está criptografada em BCrypt
 INSERT INTO account (BIRTH, CPF, CREATED_AT, EMAIL, NAME, PHOTO, ROLE, TEL, PASSWORD, STATUS) VALUES
-('1990-07-12', '222.111.000-99', CURRENT_TIMESTAMP -280, 'zuleica@email.com', 'Zuleica da Navalha', '/photo/5.jpg', 'EMPLOYE', '(21) 91111-2222', '$2a$10$Z830aS2.ZpP/AfhyEclgvOBbw3/DPsWuiAc6Qp.SVJpUfJ/O.fVQi', 'ON'),
+('1990-07-12', '222.111.000-99', CURRENT_TIMESTAMP -280, 'zuleica@email.com', 'Zuleica da Navalha', '/photo/15.jpg', 'EMPLOYE', '(21) 91111-2222', '$2a$10$Z830aS2.ZpP/AfhyEclgvOBbw3/DPsWuiAc6Qp.SVJpUfJ/O.fVQi', 'ON'),
 ('1987-05-03', '333.222.111-88', CURRENT_TIMESTAMP -270, 'brunildo@email.com', 'Brunildo dos Cortes', '/photo/6.jpg', 'EMPLOYE', '(21) 92222-3333', '$2a$10$Z830aS2.ZpP/AfhyEclgvOBbw3/DPsWuiAc6Qp.SVJpUfJ/O.fVQi', 'ON'),
-('1995-12-09', '444.333.222-77', CURRENT_TIMESTAMP -260, 'clarice@email.com', 'Clarice Estilosa', '/photo/7.jpg', 'EMPLOYE', '(21) 93333-4444', '$2a$10$Z830aS2.ZpP/AfhyEclgvOBbw3/DPsWuiAc6Qp.SVJpUfJ/O.fVQi', 'ON'),
+('1995-12-09', '444.333.222-77', CURRENT_TIMESTAMP -260, 'clarice@email.com', 'Clarice Estilosa', '/photo/17.jpg', 'EMPLOYE', '(21) 93333-4444', '$2a$10$Z830aS2.ZpP/AfhyEclgvOBbw3/DPsWuiAc6Qp.SVJpUfJ/O.fVQi', 'ON'),
 ('1993-10-18', '555.444.333-66', CURRENT_TIMESTAMP -250, 'genivaldo@email.com', 'Genivaldo Barbeiro', '/photo/8.jpg', 'EMPLOYE', '(21) 94444-5555', '$2a$10$Z830aS2.ZpP/AfhyEclgvOBbw3/DPsWuiAc6Qp.SVJpUfJ/O.fVQi', 'ON');
 
 INSERT INTO service (date, title, description, price, metadata, status, photo1, photo2, photo3, photo4) VALUES

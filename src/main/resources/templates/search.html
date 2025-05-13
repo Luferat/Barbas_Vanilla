@@ -1,0 +1,40 @@
+<#include "_header.html">
+
+<article class="container flex-grow-1 content text-light pt-2">
+
+  <h2>Resultados para "${keyword}"</h2>
+  <#if services?has_content>
+    <h3>Serviços encontrados:</h3>
+    <ul>
+      <#list services as s>
+        <li><a href="/service/detail/${s.id}">${s.title}</a></li>
+      </#list>
+    </ul>
+  </#if>
+
+  <#if employes?has_content>
+    <h3>Barbeiros encontrados:</h3>
+    <#list employes as emp>
+      <div>
+        <p style="display:flex;align-items:center">
+          <img src="${emp.photo}" alt="${emp.name}" style="width: 3rem; border-radius:50%;margin-right:1rem;display:block;">
+          <strong>${emp.name}</strong>
+        </p>
+
+        <#assign list = employeServices[emp.id?string]!>
+        <#if list?has_content>
+          <ul>
+            <#list list as s>
+              <li><a href="/service/detail/${s.id}">${s.title}</a></li>
+            </#list>
+          </ul>
+        <#else>
+          <ul><li>Nenhum serviço</li></ul>
+        </#if>
+      </div>
+    </#list>
+  </#if>
+
+</article>
+
+<#include "_footer.html">
