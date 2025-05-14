@@ -32,19 +32,53 @@ public class ApiSearchController {
         }
 
         try {
+            // Obtém os resultaos da pesquisa no banco de dados
             List<Service> services = serviceRepo.findByTitleContainingIgnoreCaseAndStatus(keyword, Service.Status.ON);
             List<Account> employes = accountRepo.findByRoleAndStatusAndNameContainingIgnoreCase(Account.Role.EMPLOYE, Account.Status.ON, keyword);
 
-            Map<Integer, List<Service>> employeServices = new HashMap<>();
+            // Obtém somente os campos úteis (e seguros) do colaborador
+            List<Map<String, Object>> simpleEmployes = employes.stream().map(emp -> {
+                Map<String, Object> map = new HashMap<>();
+                map.put("id", emp.getId());
+                map.put("name", emp.getName());
+                map.put("photo", emp.getPhoto());
+                map.put("role", emp.getRole());
+                return map;
+            }).toList();
+
+            // Obtém uma lista dos serviços que cada colaborador executa
+            Map<Integer, List<Map<String, Object>>> employeServices = new HashMap<>();
             for (Account emp : employes) {
                 List<AccountService> accServices = accountServiceRepo.findByEmployeAndServiceStatus(emp, Service.Status.ON);
-                List<Service> empServices = accServices.stream().map(AccountService::getService).toList();
+
+                // Mostra somente os dados (campos) relevantes do serviço
+                List<Map<String, Object>> empServices = accServices.stream().map(as -> {
+                    Service s = as.getService();
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", s.getId());
+                    map.put("title", s.getTitle());
+                    map.put("price", s.getPrice());
+                    map.put("photo1", s.getPhoto1());
+                    return map;
+                }).toList();
+
                 employeServices.put(emp.getId(), empServices);
             }
 
+            // Filtra somente os campos necessários de cada serviço
+            List<Map<String, Object>> simpleServices = services.stream().map(s -> {
+                Map<String, Object> map = new HashMap<>();
+                map.put("id", s.getId());
+                map.put("title", s.getTitle());
+                map.put("price", s.getPrice());
+                map.put("photo1", s.getPhoto1());
+                return map;
+            }).toList();
+
+            // Formata a chave "data" do JSON de sucesso
             Map<String, Object> result = new HashMap<>();
-            result.put("services", services);
-            result.put("employes", employes);
+            result.put("services", simpleServices);
+            result.put("employes", simpleEmployes);
             result.put("employeServices", employeServices);
 
             return JsonResponse.success(200, "Resultados da pesquisa.", result);
